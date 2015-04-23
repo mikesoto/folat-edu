@@ -87,7 +87,7 @@
 			    {
 					$data = array(
 						'courses_arr' => $courses_arr,
-						'cl_page' => 'home_featured',
+						'cl_page' => 'course_list',
 					);
 					$this->load->view('templates/course_list.php',$data);
 			    }

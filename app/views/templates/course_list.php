@@ -1,23 +1,19 @@
 <div class="list-group">
 <?php 
+	function compare($a, $b)
+	{
+	    return $b['course_rating_avg'] - $a['course_rating_avg'];
+	}
+	usort($courses_arr, "compare");
+
+
 	foreach($courses_arr as $course)
 	{	
-		$avg = '';
-		//calculate rating
-		if(!empty($course['course_rating_info']))
-		{
-			$total_ratings = count($course['course_rating_info']);
-			$sum = 0;
-			foreach($course['course_rating_info'] as $rating ){
-				$sum += $rating['rating'];
-			}
-			$avg = round($sum/$total_ratings);
-		}
-		
+		//generate the number of stars based on the course_rating_avg
 		$rating_str = '';
-		if($avg != '')
+		if($course['course_rating_avg'] != '')
 		{
-			for($i = 0; $i < $avg; $i++)
+			for($i = 0; $i < $course['course_rating_avg']; $i++)
 			{
 				$rating_str .= '<span class="glyphicon glyphicon-star"></span>';
 			}

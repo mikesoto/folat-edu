@@ -87,7 +87,7 @@ class Courses_model extends CI_Model {
 		}
 		$courses_arr = $course_query->result_array();
 
-		
+		//get related info for courses
 		for($i = 0; $i < count($courses_arr); $i++)
 		{	
 			//Add course teacher info 
@@ -109,6 +109,19 @@ class Courses_model extends CI_Model {
 			$query = $this->db->get_where('folat_course_ratings', array('course_id' => $courses_arr[$i]['id']));
 			$ratings = $query->result_array();
 			$courses_arr[$i]['course_rating_info'] = $ratings;
+			$avg = '';
+			$sum = 0;
+			//calculate average rating
+			if( !empty($ratings) )
+			{
+				$total_ratings = count($ratings);
+				foreach($ratings as $r ){
+					$int = (int)$r['rating'];
+					$sum += $int;
+				}
+				$avg = round($sum/$total_ratings);
+			}
+			$courses_arr[$i]['course_rating_avg'] = $avg;
 
 			//get all course modules for total length 
 			$mods = $this->getCourseModules($courses_arr[$i]['id']);
