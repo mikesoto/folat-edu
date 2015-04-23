@@ -76,7 +76,10 @@
 							<br>
 						    <label>
 						      <input type="checkbox" id="terms" name="terms"/> 
-						      <?php echo $this->lang->line('register_label_iHaveRead');?><a href="pages/folat-terms-of-service"><?php echo $this->lang->line('register_label_folatTermsOfService');?></a>
+						      <?php echo $this->lang->line('register_label_iHaveRead');?><br/>
+						      <a href="pages/folat-terms-of-service">
+						      	<?php echo $this->lang->line('register_label_folatTermsOfService');?>
+						      </a>
 						    </label>
 						</div>
 					</div>
