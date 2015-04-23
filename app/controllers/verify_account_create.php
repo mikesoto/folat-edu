@@ -29,6 +29,22 @@ class Verify_Account_Create extends MY_Controller {
        //insert new user into database
        if($this->account_model->insert_new_user())
        {
+          $this->load->library('email');
+          $this->email->from($this->input->post('user_email'), $this->input->post('user_name'));
+          $this->email->to('desarrollowebuno@gmail.com');
+          $body = 'You have a new user!:<br/>
+          first name: '.$this->input->post('user_name').'<br/>
+          last name: '.$this->input->post('user_lastname').'<br/>
+          email: '.$this->input->post('user_email').'<br/>
+          username: '.$this->input->post('user_username').'<br/>
+          ';
+          $this->email->subject('New user Registration');
+          $this->email->message($body);
+          if(!$this->email->send()){
+           // echo $this->email->print_debugger();
+           die();
+          }
+
           //Go to success message
           $_SESSION['flash_success'] = $this->lang->line('register_text_thankYouMessage');
           redirect('account/login');

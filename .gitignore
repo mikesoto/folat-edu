@@ -7,3 +7,4 @@
 */cache/!.htaccess
 /database
 /app/config/database.php
+/app/config/email.php
