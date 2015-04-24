@@ -97,6 +97,7 @@ class Courses_model extends CI_Model {
 				'user_id' => $teacher['user_id'],
 				'user_name' => $teacher['user_name'],
 				'user_lastname' => $teacher['user_lastname'],
+				'user_username' => $teacher['user_username'],
 				'user_email' => $teacher['user_email'],
 				'user_about' => $teacher['user_about'],
 				'user_image' => $teacher['user_image']
@@ -130,8 +131,10 @@ class Courses_model extends CI_Model {
 			}
 			$courses_arr[$i]['course_rating_avg'] = $avg;
 
-			//get all course modules for total length 
+			//get all course modules 
 			$mods = $this->getCourseModules($courses_arr[$i]['id']);
+			$courses_arr[$i]['course_modules'] = $mods;
+			//get total length of course
 			$total_length = $this->getCourseLength($mods);
 			//add course time in HH:MM format
 			$courses_arr[$i]['course_time'] = convertToTime($total_length);

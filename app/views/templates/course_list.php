@@ -113,9 +113,6 @@
 					</div>
 				</div>
 
-
-
-
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="row">
@@ -136,6 +133,23 @@
 									  '.$this->lang->line('courseField_read_more').'
 									</a>
 								</p>
+								';
+									if(!empty($course['course_modules'])){
+									  echo '<div class="course-info-modules-container">
+											  	<strong>'.$this->lang->line('courseField_modules').':</strong>('.count($course['course_modules']).') ';
+												foreach($course['course_modules'] as $module){
+												  	echo '<a href="'.base_url('courses/details/'.$course['course_slug']).'" class="btn btn-default course-info-modules">
+														     '.$module['title'].'
+													  	  </a>
+												  	';
+											}
+									echo'	</div>';
+									}
+									else
+									{
+										echo '<strong>'.$this->lang->line('courseField_modules').':</strong> (0) <p>This course does not have any modules yet</p>';
+									}
+							echo'
 							</div>
 						</div>
 					</div>

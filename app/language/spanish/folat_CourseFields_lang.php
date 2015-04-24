@@ -1,6 +1,7 @@
 <?php
 
 $lang['courseField_teacher']	 	= 'Profesor(a)';
+$lang['courseField_modules']	 	= 'Módulos';
 $lang['courseField_category'] 		= 'Categoría';
 $lang['courseField_title']	 		= 'Título';
 $lang['courseField_subcategory'] 	= 'Subcategoría';
