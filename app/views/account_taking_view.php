@@ -9,8 +9,40 @@
 			$data['selected'] = 'taking'; 
 			$this->load->view('templates/account_submenu',$data);
 		?>
+		<div class="col-md-12 animated fadeIn">
+			<div class="row">
+				<div class="col-lg-12">
+					<p>&nbsp;</p>
+					<h3><?php echo $this->lang->line('coursesTaking_title_coursesImTaking');?></h3>
+				</div>
+				<?php $this->load->view('templates/flash_messages');?>
+			</div>
+			<?php 
+				if(empty($courses_taking)){
+					//show message if not taking any courses
+					echo ' <div class="col-lg-12 text-center">
+							  <h1>&nbsp;</h1>
+							  <h3>'.$this->lang->line('coursesTaking_msg_haventSignedUp').'</h3>
+							  
+							  <p>&nbsp;</p>
+							  <p>
+							  	<a href="'.base_url('courses').'" class="btn btn-warning btn-lg">'.$this->lang->line('coursesTaking_btn_browseCourses').'</a>
+							  </p>
+						   </div>';
+				}
+				else
+				{
+					$data = array(
+					'courses_arr' => $courses_taking,
+					'cl_page' => 'account_taking',
+					);
+					$this->load->view('templates/course_list.php',$data);
+				}
+			?>
+		</div>
 
-		<div class="animated fadeIn">
+
+	<?php /*	<div class="animated fadeIn">
 			<div class="row">
 				<div class="col-lg-12">
 					<p>&nbsp;</p>
@@ -154,7 +186,8 @@
 			}
 
 			?>
-		</div>
+			</div>
+	*/?>
 	</div>
 
 	<!-- ACCOUNT ALERTS SIDEBAR-->

@@ -149,6 +149,31 @@ class Account_model extends CI_Model {
 					$query = $this->db->get_where('folat_subcategories', array('id' => $course['course_subcat_id']));
 					$subcategory = $query->row_array();
 					$course['course_subcat_info'] = $subcategory;
+
+					//Add course rating info 
+					$query = $this->db->get_where('folat_course_ratings', array('course_id' => $course['id']));
+					$ratings = $query->result_array();
+					$course['course_rating_info'] = $ratings;
+					
+					//Add course rating average
+					$avg = '';
+					$sum = 0;
+					//calculate average rating
+					if( !empty($ratings) )
+					{
+						$total_ratings = count($ratings);
+						foreach($ratings as $r ){
+							$int = (int)$r['rating'];
+							$sum += $int;
+						}
+						$avg = round($sum/$total_ratings);
+					}
+					$course['course_rating_avg'] = $avg;
+
+					//get all course modules for total length 
+					$mods = $this->getCourseModules($course['id']);
+					$total_length = $this->getCourseLength($mods);
+					$course['course_time'] = convertToTime($total_length);
 			      	
 			      	//push the generated course data into the enrolled_courses array
 			      	array_push($enrolled_courses, $course);
@@ -185,6 +210,26 @@ class Account_model extends CI_Model {
 				$query = $this->db->get_where('folat_subcategories', array('id' => $course['course_subcat_id']));
 				$subcategory = $query->row_array();
 				$course['course_subcat_info'] = $subcategory;
+
+				//Add course rating average
+				$avg = '';
+				$sum = 0;
+				//calculate average rating
+				if( !empty($ratings) )
+				{
+					$total_ratings = count($ratings);
+					foreach($ratings as $r ){
+						$int = (int)$r['rating'];
+						$sum += $int;
+					}
+					$avg = round($sum/$total_ratings);
+				}
+				$course['course_rating_avg'] = $avg;
+
+				//get all course modules for total length 
+				$mods = $this->getCourseModules($course['id']);
+				$total_length = $this->getCourseLength($mods);
+				$course['course_time'] = convertToTime($total_length);
 
 				//push the generated course data into the teaching_courses array
 		      	array_push($teaching_courses, $course);
@@ -239,6 +284,68 @@ class Account_model extends CI_Model {
 			return false;
 		}
 	}
+
+	public function getCourseModules($course_id){
+		$this->db->order_by('chapter','asc');
+		$this->db->order_by('section','asc');
+		$modules_query = $this->db->get_where('folat_modules',array('course_id' => $course_id));
+		$modules_arr = $modules_query->result_array();
+		if($modules_arr)
+		{
+			//add module slides and questions count for each module in result
+			for($i=0; $i < count($modules_arr); $i++)
+			{
+				$slides_query = $this->db->get_where('folat_content_text_slides',array('module_id' => $modules_arr[$i]['id']));
+				$slides_arr = $slides_query->result_array();
+				//add slides count info to each module
+				$modules_arr[$i]['slides_count'] = count($slides_arr);
+				//get count of total questions for each slide and add to total for this module
+				$questions_count = 0;
+				//add up all the lengths of each slide to get total length value for this module
+				$module_length = 0;
+				foreach($slides_arr as $slide)
+				{	
+					//add up slide length
+					$module_length += $slide['length'];
+					//get questions for this slide
+					$this->db->where('slide_id',$slide['id']);
+					$this->db->from('folat_review_questions');
+					$slide_questions_count = $this->db->count_all_results();
+					$questions_count += $slide_questions_count;
+				}
+				//add total questions count to module info
+				$modules_arr[$i]['questions_count'] = $questions_count;
+				$modules_arr[$i]['total_length'] = $module_length;
+				$modules_arr[$i]['module_time'] = convertToTime($modules_arr[$i]['total_length']);
+				//add the module type name 
+				$this->db->select('name');
+				$this->db->where('id',$modules_arr[$i]['type_id']);
+				$name_query = $this->db->get('folat_module_types');
+				$name_arr = $name_query->row_array();
+				//add module_type_name to the module info
+				$modules_arr[$i]['module_type_name'] = $name_arr['name'];
+			}
+			return $modules_arr;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	public function getCourseLength($modules){
+		$course_length = 0;
+		if($modules)
+		{
+			foreach($modules as $module)
+			{
+				$course_length += $module['total_length'];//the modules total length includes length of all of it's slides
+			}
+		}
+		return $course_length;
+	}
+
 
 
 	public function generate_cert_code($course_id,$user_id){

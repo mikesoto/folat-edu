@@ -22,7 +22,7 @@
 		echo '	
 			<div class="course_cat_listing">
 				<div class="row">
-					<div class="col-lg-9 course-info-listing">
+					<div class="col-lg-8 course-info-listing">
 						<a href="'.base_url('courses/details/'.$course['course_slug']).'">
 							<h3 class="list-course-title">'.$course['course_title'].'</h3>
 						</a>
@@ -30,11 +30,27 @@
 					<div class="col-lg-2 course-info-rating">
 						'.$rating_str.'
 					</div>
-					<div class="col-lg-1 list-course-info-btn">
-						<a id="'.$course['id'].'" href="#" onclick="toggleListInfo(this.id);return false;">
+					<div class="col-lg-2 list-course-info-btn text-right">
+						<a id="'.$course['id'].'" href="#" onclick="toggleListInfo(this.id);return false;" title="Show info">
 							<span class="glyphicon glyphicon-info-sign"></span>
-						</a>
-					</div>
+						</a>';
+						if(trim($cl_page) == 'account_taking'){
+							echo '<a href="'.base_url('/classroom/main/'.$course['course_slug']).'" title="Go to classroom">
+									<i class="fa fa-sign-in">&nbsp;</i>
+								  </a>
+							';
+						}
+						if(trim($cl_page) == 'account_teaching'){
+							echo '<a href="'.base_url('/courses/manage/'.$course['course_slug']).'" title="Edit this course">
+									<i class="fa fa-pencil-square-o"></i>
+								  </a>
+							';
+							echo '<a href="#" onclick="confirmDeleteSet(\''.$course['course_title'].'\', \''.base_url('/courses/delete/'.$course['id']).'\');show_modal(\'delete_confirm\');" title="Delete this course">
+							       	<i class="fa fa-trash-o"></i>
+							      </a>
+							';
+						}
+		echo '		</div>
 				</div>
 
 				<div id="list-info-'.$course['id'].'" class="row course_info_extra">

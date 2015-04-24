@@ -454,6 +454,7 @@ a.subcat-link .glyphicon{
 .list-course-info-btn {
 	font-size:18px;
 	padding-top:15px;
+	padding-right:30px;
 }
 
 .list-module-info-btn {
@@ -757,6 +758,19 @@ a.subcat-link .glyphicon{
 }
 
 .btn-regnow {
-	color:#888;
+	color:#666;
 	margin-bottom:20px;
+}
+
+.list-course-info-btn .fa-sign-in{
+	font-size:22px;
+}
+
+.list-course-info-btn .fa-trash-o {
+	font-size:22px;
+	color:red;
+}
+
+.list-course-info-btn .fa-pencil-square-o {
+	font-size:22px;
 }

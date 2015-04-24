@@ -58,6 +58,7 @@
 				});
 			})
 		</script>
+		<link href="<?php echo base_url('css/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet">
 		<link href="<?php echo base_url('css/main.css');?>" rel="stylesheet">
 	</head>
 	<!--[if gte IE 9]>
