@@ -138,7 +138,14 @@ class Account_model extends CI_Model {
 			    	//ADD TEACHER INFO
 			      	$query = $this->db->get_where('folat_users', array('user_id' => $course['course_teacher_id']));
 					$teacher = $query->row_array();
-					$course['course_teacher_info'] = $teacher;
+					$course['course_teacher_info'] = array(
+						'user_id' => $teacher['user_id'],
+						'user_name' => $teacher['user_name'],
+						'user_lastname' => $teacher['user_lastname'],
+						'user_email' => $teacher['user_email'],
+						'user_about' => $teacher['user_about'],
+						'user_image' => $teacher['user_image']
+					);
 
 					//ADD CATEGORY INFO
 					$query = $this->db->get_where('folat_categories', array('id' => $course['course_category_id']));
@@ -199,7 +206,14 @@ class Account_model extends CI_Model {
 			    //ADD TEACHER INFO
 		      	$query = $this->db->get_where('folat_users', array('user_id' => $course['course_teacher_id']));
 				$teacher = $query->row_array();
-				$course['course_teacher_info'] = $teacher;
+				$course['course_teacher_info'] = array(
+					'user_id' => $teacher['user_id'],
+					'user_name' => $teacher['user_name'],
+					'user_lastname' => $teacher['user_lastname'],
+					'user_email' => $teacher['user_email'],
+					'user_about' => $teacher['user_about'],
+					'user_image' => $teacher['user_image']
+				);
 
 				//ADD CATEGORY INFO
 				$query = $this->db->get_where('folat_categories', array('id' => $course['course_category_id']));

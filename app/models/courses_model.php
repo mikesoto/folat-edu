@@ -93,7 +93,14 @@ class Courses_model extends CI_Model {
 			//Add course teacher info 
 			$query = $this->db->get_where('folat_users', array('user_id' => $courses_arr[$i]['course_teacher_id']));
 			$teacher = $query->row_array();
-			$courses_arr[$i]['course_teacher_info'] = $teacher;
+			$courses_arr[$i]['course_teacher_info'] = array(
+				'user_id' => $teacher['user_id'],
+				'user_name' => $teacher['user_name'],
+				'user_lastname' => $teacher['user_lastname'],
+				'user_email' => $teacher['user_email'],
+				'user_about' => $teacher['user_about'],
+				'user_image' => $teacher['user_image']
+			);
 
 			//Add course category info 
 			$query = $this->db->get_where('folat_categories', array('id' => $courses_arr[$i]['course_category_id']));
