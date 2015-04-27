@@ -24,7 +24,7 @@
 					<br>
 				    <label>
 				      <input type="checkbox" id="terms" name="terms" checked="checked">
-				       <?php echo $this->lang->line('login_iHaveRead');?> <a href="pages/folat-terms-of-service"><?php echo $this->lang->line('login_termsOfService');?></a>
+				       <?php echo $this->lang->line('login_iHaveRead');?> <br/> <a href="<?php echo base_url('pages/terms');?>"><?php echo $this->lang->line('login_termsOfService');?></a>
 				    </label>
 				</div>
 				<br>

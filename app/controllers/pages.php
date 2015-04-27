@@ -13,4 +13,11 @@ class Pages extends MY_controller {
 		$data['courses_arr'] = $this->courses_model->getCourses(NULL, NULL, TRUE,$this->config->item('language'));
 		$this->MY_show_page('Home', 'home_view', $data);
 	}
+
+	//loads terms of service
+	public function terms() {
+		global $data;
+		$this->MY_setLanguage('Home');
+		$this->MY_show_page('Home', 'terms_view', $data);
+	}
 }
