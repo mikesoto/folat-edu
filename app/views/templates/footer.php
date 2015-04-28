@@ -1,7 +1,7 @@
 		<div class="navbar navbar-inverse footer">
 			<div class="row">		
 				<div class="col-sm-4 text-left">
-					&copy; 2014 folat-edu.net
+					&copy; 2015 folat-edu.net
 				</div>
 				<div class="col-sm-4 text-center">
 					<a href="<?php echo base_url('pages/terms');?>">Terms and Conditions</a>

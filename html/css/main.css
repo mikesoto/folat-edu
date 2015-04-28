@@ -803,3 +803,13 @@ a.subcat-link .glyphicon{
 	float:right;
 	padding:20px;
 }
+
+.subcat_badge{
+	background-color:#ccc;
+	font-size:10px;
+}
+
+.cat_badge{
+	background-color:#999;
+	font-size:12px;
+}

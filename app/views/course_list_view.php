@@ -28,6 +28,7 @@
 	{
 		$insub = ' | '.$this->lang->line('subcat_'.strtolower(str_replace(' ','-',$subcategory)));
 	}
+
 ?>
 <div class="row">
 	<!--Validation Errors if any-->
@@ -48,9 +49,13 @@
 				foreach($cat_list as $cat)
 				{
 					echo '<a href="'.base_url('courses/category/'.$cat['cat_slug']).'" class="list-group-item '.is_active_cat($cat['cat_name'],$category).'" title="'.$cat['cat_description'].'">
-							'.$this->lang->line('cat_'.$cat['cat_slug']).'
-						  </a>
-						';
+							'.$this->lang->line('cat_'.$cat['cat_slug']);
+							if($incat[$cat['id']] > 0)
+							{
+								echo '<span class="badge cat_badge">'.$incat[$cat['id']].'</span>';
+							}
+					echo '</a>';
+						
 					if($cat['cat_name'] == $category)
 					{
 						foreach($subcat_list as $subcat)
@@ -59,12 +64,15 @@
 							{
 							  echo '<a href="'.base_url('courses/category/'.$cat['cat_slug'].'/'.$subcat['subcat_slug']).'" class="list-group-item subcat-link '.is_active_subcat($subcat['subcat_name'],$subcategory).'" title="'.$subcat['subcat_description'].'">
 										<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-										'.$this->lang->line('subcat_'.$subcat['subcat_slug']).'
-								    </a>';
+										'.$this->lang->line('subcat_'.$subcat['subcat_slug']);
+										if($insubcat[$subcat['id']] > 0)
+										{
+											echo '<span class="badge subcat_badge">'.$insubcat[$subcat['id']].'</span>';
+										}
+							  echo '</a>';
 							}
 						}
 					}
-					
 				}	
 			?>
 			<a href="#" class="list-group-item request-new-cat" data-toggle="modal" data-target="#request_cat_modal"><?php echo $this->lang->line('courseList_btn_requestNewCategory');?></a>

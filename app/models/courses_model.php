@@ -442,4 +442,26 @@ class Courses_model extends CI_Model {
 		//return course title for success message
 		return $row['course_title'];
 	}
+
+	public function getInCategories($cat_list,$lang){
+		$incat = array();
+		foreach($cat_list as $cat){
+			$this->db->where(array('course_category_id' => $cat['id'], 'course_lang' => $lang));
+			$this->db->from('folat_courses');
+			$incat[$cat['id']] = $this->db->count_all_results();
+		}
+		return $incat;
+	}
+
+	public function getInSubCategories($subcat_list,$lang){
+		$insubcat = array();
+		foreach($subcat_list as $subcat){
+			$this->db->where(array('course_subcat_id' => $subcat['id'], 'course_lang' => $lang));
+			$this->db->from('folat_courses');
+			$insubcat[$subcat['id']] = $this->db->count_all_results();
+		}
+		return $insubcat;
+	}
+
+
 }

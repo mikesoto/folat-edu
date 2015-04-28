@@ -111,6 +111,12 @@ class MY_Controller extends CI_controller {
 		$data['subcat_list'] = $this->courses_model->getSubCatList();
 	}
 
+	public function MY_get_incategories(){
+		global $data;
+		$data['incat'] = $this->courses_model->getInCategories($data['cat_list'], $this->config->item('language'));
+		$data['insubcat'] = $this->courses_model->getInSubCategories($data['subcat_list'], $this->config->item('language'));
+	}
+
 	public function MY_checkIfCourseOwner($course_id){
 		global $data;
 		if(!$this->courses_model->check_ownership($course_id, $data['user_id']))
