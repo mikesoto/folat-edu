@@ -786,3 +786,8 @@ a.subcat-link .glyphicon{
 	font-size:12px;
 	padding:5px;
 }
+
+#paypal_donate_btn{
+	float:right;
+	margin-top:10px;
+}

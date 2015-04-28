@@ -287,13 +287,13 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="form-group">
-										 	<label for="title"><?php echo $this->lang->line('slideField_orderNum');?>:</label> <a tabindex="0" class="btn btn-lg btn-info form-tooltip-button" role="button" data-trigger="focus" data-toggle="popover" title="Order Number" data-content="Slides are sorted and listed by this number. You can always edit this later to move the slide up or down in the list.">?</a>
+										 	<label for="order_num"><?php echo $this->lang->line('slideField_orderNum');?>:</label> <a tabindex="0" class="btn btn-lg btn-info form-tooltip-button" role="button" data-trigger="focus" data-toggle="popover" title="Order Number" data-content="Slides are sorted and listed by this number. You can always edit this later to move the slide up or down in the list.">?</a>
 										 	<input type="text" class="form-control" id="order_num" name="order_num" value="<?php echo set_value('order_num'); ?>" style="max-width:100px;"/>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
-										 	<label for="title"><?php echo $this->lang->line('slideField_length');?>:</label> <a tabindex="0" class="btn btn-lg btn-info form-tooltip-button" role="button" data-trigger="focus" data-toggle="popover" title="Slide Length" data-content="The amount of time (in minutes) that the student is expected to spend reading this slide and answering all of it's questions. Recommended time is between 3 and 5 minutes per slide. These times are added up to calculate the total time for the module and course.">?</a>
+										 	<label for="length"><?php echo $this->lang->line('slideField_length');?>:</label> <a tabindex="0" class="btn btn-lg btn-info form-tooltip-button" role="button" data-trigger="focus" data-toggle="popover" title="Slide Length" data-content="The amount of time (in minutes) that the student is expected to spend reading this slide and answering all of it's questions. Recommended time is between 3 and 5 minutes per slide. These times are added up to calculate the total time for the module and course.">?</a>
 										 	<input type="text" class="form-control" id="length" name="length" value="<?php echo set_value('length','5'); ?>" style="max-width:100px;"/> minutes (numbers only)
 										</div>
 									</div>
@@ -302,7 +302,7 @@
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="form-group">
-										 	<label for="title"><?php echo $this->lang->line('slideField_body');?>:</label> <a tabindex="0" class="btn btn-lg btn-info form-tooltip-button" role="button" data-trigger="focus" data-toggle="popover" title="Slide Text" data-content="This is the body of the text slide which should contain up to 2 or 3 paragraphs (max 1000 characters) of knowledge for the student to learn and retain. The Questions in the next step will be related to this content and will test the student's comprehension at the end of the module.">?</a>
+										 	<label for="body"><?php echo $this->lang->line('slideField_body');?>:</label> <a tabindex="0" class="btn btn-lg btn-info form-tooltip-button" role="button" data-trigger="focus" data-toggle="popover" title="Slide Text" data-content="This is the body of the text slide which should contain up to 2 or 3 paragraphs (max 1000 characters) of knowledge for the student to learn and retain. The Questions in the next step will be related to this content and will test the student's comprehension at the end of the module.">?</a>
 										 	<textarea class="form-control mceEditor" id="body" name="body" maxlength="2000" rows="10"><?php echo set_value('body'); ?></textarea>
 										</div>
 									</div>	
@@ -311,7 +311,7 @@
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="form-group">
-										 	<label for="title"><?php echo $this->lang->line('slideField_references');?>:</label> <a tabindex="0" class="btn btn-lg btn-info form-tooltip-button" role="button" data-trigger="focus" data-toggle="popover" title="Text References" data-content="It's recommended to cite your references in order to support the validity of your course. This is optional, but can be useful to your student's as they can read-up on some of your sources to learn more. It's also important to give credit to authors of original works and respect copyright laws. Be sure to include the Author, Title of Book, Article, or Web Page, Date, and URL's if any.">?</a>
+										 	<label for="refs"><?php echo $this->lang->line('slideField_references');?>:</label> <a tabindex="0" class="btn btn-lg btn-info form-tooltip-button" role="button" data-trigger="focus" data-toggle="popover" title="Text References" data-content="It's recommended to cite your references in order to support the validity of your course. This is optional, but can be useful to your student's as they can read-up on some of your sources to learn more. It's also important to give credit to authors of original works and respect copyright laws. Be sure to include the Author, Title of Book, Article, or Web Page, Date, and URL's if any.">?</a>
 										 	<textarea class="form-control" id="refs" name="refs" rows="4"><?php echo set_value('refs'); ?></textarea>
 										</div>
 									</div>	
