@@ -1,7 +1,20 @@
 <div class="container">
 	<div class="row animated fadeIn">
-		<div class="col-md-12">
-			<h4>Course: <a href="<?php echo base_url('classroom/main/'.$course_arr['course_slug']);?>"><?php echo $course_arr['course_title'];?></a> &nbsp; - &nbsp; Module: <a href="#" onclick="repeatModule('<?php echo $module_arr["id"];?>');return false;"><?php echo $module_arr['chapter'].'.'.$module_arr['section'].' &nbsp; '.$module_arr['title'];?></a></h4>
+		<div class="col-md-5">
+			    <h4><?php echo $this->lang->line('classroom_module_course');?>:</h4>
+			    <h4><a href="<?php echo base_url('classroom/main/'.$course_arr['course_slug']);?>"><?php echo $course_arr['course_title'];?></a></h4>
+		</div>
+		<div class="col-md-5">
+			    <h4><?php echo $this->lang->line('classroom_module_module');?>:</h4>
+			    <h4><a href="#"><?php echo $module_arr['chapter'].'.'.$module_arr['section'].' &nbsp; '.$module_arr['title'];?></a></h4>
+		</div>
+		<div class="col-md-1 text-center">
+			   	<h4>Reset</h4>
+			   	<h4>
+			   		<a href="#" onclick="repeatModule('<?php echo $module_arr["id"];?>');return false;" title="Reset Module">
+			   			<i class="fa fa-refresh"></i>
+					</a>
+				</h4>
 		</div>
 
 		<div id="slide_row_window" class="col-md-12 slide_row_container">
@@ -29,7 +42,7 @@
 				}
 				else
 				{
-					echo '<div class="col-md-12 text-center"><h3>There are no slides for this module!</h3></div>';
+					echo '<div class="col-md-12 text-center"><h3>'.$this->lang->line('classroom_module_noslides').'</h3></div>';
 				}
 				
 			?>
@@ -42,7 +55,7 @@
 						<a id="next-slide-btn" href="#" onclick="showNextSlide();return false;">
 							<span class="glyphicon glyphicon-arrow-right next_arrow"></span>
 						</a>
-						<a id="start_review_btn" href="#" class="btn btn-primary" onclick="start_review();return false;">Start Review</a>
+						<a id="start_review_btn" href="#" class="btn btn-primary" onclick="start_review();return false;"><?php echo $this->lang->line('classroom_module_startReview');?></a>
 					</div>
 				<?php endif;?>
 			</div>
@@ -55,7 +68,7 @@
 		<!---------------------- Module Review ------------------------------>
 		<div id="module_review" class="row animated fadeIn">
 			<div class="col-md-12 text-center">
-				<h3>Module Review</h3>
+				<h3><?php echo $this->lang->line('classroom_module_moduleReview');?></h3>
 				<?php 
 					$q_count = 1;
 					$q_count_total = count($questions_arr);
@@ -103,7 +116,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        		<h4 class="modal-title">How do you rate this course?</h4>
+        		<h4 class="modal-title"><?php echo $this->lang->line('classroom_module_howDoYouRate');?></h4>
       		</div>
       		<div class="modal-body">
 				<div class="row">
@@ -128,7 +141,7 @@
 								</tbody>
 							</table>
 							<div class="form-group">
-								<label for="comment">Comments or Recommendations: (optional)</label><br/>
+								<label for="comment"><?php echo $this->lang->line('classroom_module_commentsRec');?></label><br/>
 								<textarea id="comment" name="comment" cols="50" rows="4"></textarea>
 							</div>
 							<input type="hidden" name="course_id" value="<?php echo $course_arr['id'];?>"/>
@@ -138,8 +151,8 @@
 				</div>
 			</div>
       		<div class="modal-footer">
-		    	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-		    	<button id="rate_course_btn" type="button" class="btn btn-primary" onclick="checkRateSubmit();return false;">Rate &amp; view Certificate</button>
+		    	<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('classroom_module_cancel');?></button>
+		    	<button id="rate_course_btn" type="button" class="btn btn-primary" onclick="checkRateSubmit();return false;"><?php echo $this->lang->line('classroom_module_rateAndViewCert');?></button>
 			</div>
 		</div>
 	</div>
@@ -160,7 +173,7 @@
 				if($has_review_score[0]['final_score'] < 69)
 				{
 					echo "
-					if(confirm('You have a failing grade for this module, do you want to clear your review results and start over?'))
+					if(confirm('<?php echo $this->lang->line('classroom_module_failingGrade');?>'))
 					{
 						repeat_url = '".base_url("classroom/repeat_module/".$module_arr["id"])."';
 						document.location = repeat_url;
@@ -216,7 +229,7 @@
 			}
 		}
 		if(oneChecked == false){
-			alert('Please give a rating by selecting one of the stars');
+			alert("<?php echo $this->lang->line('classroom_module_pleaseGiveRating');?>");
 		}
 		else
 		{
@@ -309,7 +322,7 @@
 		start_rev = false;
 		if(has_review_score || has_review_score === 0)
 		{
-			if(confirm('You have already completed the review for this module, do you want to clear your review results and start over?'))
+			if(confirm("<?php echo $this->lang->line('classroom_module_completedReview');?>"))
 			{
 				start_rev = true;
 				<?php echo 'clear_url = "'.base_url("classroom/clear_module_review/").'"';?>
@@ -381,9 +394,9 @@
 				}
 				else //there are no review questions to show
 				{
-					$("#module_review").append('<p><div class="col-md-12 text-center"><h4>There are no review questions for this Module.</strong></h4></div></p>');	
+					$("#module_review").append('<p><div class="col-md-12 text-center"><h4><?php echo $this->lang->line("classroom_module_noReviewQuestions");?></strong></h4></div></p>');	
 
-					$("#module_review").append('<p><div class="col-md-12 text-center"><a class="btn btn-danger" href="#" onclick="repeatModule(\'<?php echo $module_arr["id"];?>\');return false;">Repeat Module</a></div></p>');
+					$("#module_review").append('<p><div class="col-md-12 text-center"><a class="btn btn-danger" href="#" onclick="repeatModule(\'<?php echo $module_arr["id"];?>\');return false;"><?php echo $this->lang->line("classroom_module_repeatModule");?></a></div></p>');
 
 					//send ajax request
 					$.ajax({
@@ -405,11 +418,12 @@
 					    success: function( json ) {
 					  		if(json.next_module.set == "TRUE")
 							{
-								$("#module_review").append('<p><div class="col-md-12 text-center"><a id="classrm-next-module-btn" class="btn btn-primary" href="<?php echo base_url("classroom/module");?>/'+json.next_module.module_id+'">Next: '+json.next_module.chapter+'.'+json.next_module.section+' - '+json.next_module.module_title+'</a></div></p>');
+								$("#module_review").append('<p><div class="col-md-12 text-center"><a id="classrm-next-module-btn" class="btn btn-primary" href="<?php echo base_url("classroom/module");?>/'+json.next_module.module_id+'"><?php echo $this->lang->line('classroom_module_next');?>: '+json.next_module.chapter+'.'+json.next_module.section+' - '+json.next_module.module_title+'</a></div></p>');
 							}
 							else
 							{
-								$("#module_review").append('<p><div class="col-md-12 text-center"><h3>You\'ve reached the end of the course.</h3></div></p>');
+								$("#module_review").append('<h1>&nbsp;</h1><div class="row text-center"><h3><?php echo $this->lang->line("classroom_module_congratsEndOfCourse");?></h3></div>');
+								$("#module_review").append('<h1>&nbsp;</h1><div class="row text-center"><a href="#" data-toggle="modal" data-target="#rate_course_modal" class="btn btn-primary"><?php echo $this->lang->line("classroom_module_rateToReceive");?></a></div>');
 							}
 					    },
 					 
@@ -459,12 +473,12 @@
 		    success: function( json ) {
 		  	if(json.status == 'correct')
 		    	{
-		    		$("#answer_check_"+q_count).html('That is correct!<br/><a href="#" class="btn btn-primary pull-right" onclick="show_next_question('+q_count+','+q_count_total+');return false;">Next</a><br class="clearfix"/>');
+		    		$("#answer_check_"+q_count).html('<?php echo $this->lang->line("classroom_module_thatIsCorrect");?><br/><a href="#" class="btn btn-primary pull-right" onclick="show_next_question('+q_count+','+q_count_total+');return false;">Next</a><br class="clearfix"/>');
 		    		$("#answer_"+q_count+"_"+a_count).addClass('classroom_answer_correct');
 		    	}
 		    	else
 		    	{
-		    		$("#answer_check_"+q_count).html('That is incorrect. The correct answer is: <strong>'+json.correct_answer+'</strong><br/><a href="#" class="btn btn-primary pull-right" onclick="show_next_question('+q_count+','+q_count_total+');return false;">Next</a><br class="clearfix"/>');
+		    		$("#answer_check_"+q_count).html('<?php echo $this->lang->line("classroom_module_thatIsIncorrect");?> <strong>'+json.correct_answer+'</strong><br/><a href="#" class="btn btn-primary pull-right" onclick="show_next_question('+q_count+','+q_count_total+');return false;">Next</a><br class="clearfix"/>');
 		    		$("#answer_"+q_count+"_"+a_count).addClass('classroom_answer_incorrect');
 		    	}
 		    },
@@ -518,7 +532,7 @@
 			 
 			    // Code to run if the request fails; the raw request and status codes are passed to the function
 			    error: function( xhr, status, errorThrown ) {
-			        alert( "Sorry, there was a problem generating the review results!" );
+			        alert( "<?php echo $this->lang->line('classroom_module_problemGenRev');?>" );
 			        console.log( "Error: " + errorThrown );
 			        console.log( "Status: " + status );
 			        console.dir( xhr );
@@ -557,53 +571,54 @@
 			}
 			res_row_str +=	  	'</div>';
 			res_row_str += 	  	'<div class="col-md-4">';
-			res_row_str +=	     	'<strong>Question:</strong> <br/>'+json_res.rows[i].question;
+			res_row_str +=	     	'<strong><?php echo $this->lang->line("classroom_module_question");?>:</strong> <br/>'+json_res.rows[i].question;
 			res_row_str +=	  	'</div>';
 			res_row_str += 	  	'<div class="col-md-3">';
-			res_row_str +=	     	'<strong>Selected Answer:</strong> <br/>'+json_res.rows[i].selected_answer;
+			res_row_str +=	     	'<strong><?php echo $this->lang->line("classroom_module_selAnswer");?>:</strong> <br/>'+json_res.rows[i].selected_answer;
 			res_row_str +=	  	'</div>';
 			res_row_str +=	  	'<div class="col-md-4">';
-			res_row_str +=	     	'<strong>Correct Answer:</strong> <br/>'+json_res.rows[i].correct_answer;
+			res_row_str +=	     	'<strong><?php echo $this->lang->line("classroom_module_correctAnswer");?>:</strong> <br/>'+json_res.rows[i].correct_answer;
 			res_row_str +=	  	'</div>';
 			res_row_str +=	'</div>';	
 		}
 			
 		//add score result to top of review
-		score_res_str = '<div class="row"><div class="rev-res-score col-md-4"><strong>Your score for this review is: '+Math.round(res_score)+'</strong></div>';
+		score_res_str = '<div class="row"><div class="rev-res-score col-md-6"><?php echo $this->lang->line("classroom_module_yourScore");?>: <strong>'+Math.round(res_score)+'</strong></div>';
 		if(Math.round(res_score) > 69)
 	 	{
-	 		score_res_str += '<div class="col-md-8 rev-res-message">You have proven comprehension of this material and may continue to the next module.</div>';
+	 		score_res_str += '<div class="col-md-6 rev-res-message"><?php echo $this->lang->line("classroom_module_provenComprehension");?></div>';
 	 	}
 	 	else
 	 	{
-	 		score_res_str += '<div class="col-md-8 rev-res-message">You have not proven comprehension of this material. Please try again.</div>';
+	 		score_res_str += '<div class="col-md-6 rev-res-message"><?php echo $this->lang->line("classroom_module_notProvenComprehension");?></div>';
 	 	}
 	 	score_res_str +='</div>';//closes the rev-res-score row
 		$("#review_results").html(score_res_str);
 
 		$("#review_results").append(res_row_str);
 
-		$("#review_results").append('<br/><br/><a class="btn btn-danger" href="#" onclick="repeatModule(\'<?php echo $module_arr["id"];?>\');return false;">Repeat Module</a>');
+		$("#review_results").append('<br/><br/><a class="btn btn-danger" href="#" onclick="repeatModule(\'<?php echo $module_arr["id"];?>\');return false;"><?php echo $this->lang->line("classroom_module_repeatModule");?></a>');
 
 		if(Math.round(res_score) > 70)
 		{
 			if(json_res.next_module.set == "TRUE")
 			{
-				$("#review_results").append('<br/><br/><a id="classrm-next-module-btn" class="btn btn-primary" href="<?php echo base_url("classroom/module");?>/'+json_res.next_module.module_id+'">Next: '+json_res.next_module.chapter+'.'+json_res.next_module.section+' - '+json_res.next_module.module_title+'</a>');
+				$("#review_results").append('<br/><br/><a id="classrm-next-module-btn" class="btn btn-primary" href="<?php echo base_url("classroom/module");?>/'+json_res.next_module.module_id+'"><?php echo $this->lang->line("classroom_module_next");?>: '+json_res.next_module.chapter+'.'+json_res.next_module.section+' - '+json_res.next_module.module_title+'</a>');
 			}
 			else
 			{
-				$("#review_results").append('<br/><br/><h3>Congratulations! You\'ve reached the end of the course.</h3>');
-				$("#review_results").append('<br/><a href="#" data-toggle="modal" data-target="#rate_course_modal" class="btn btn-primary">Rate this course to receive your certificate of completion.</a>');
+				$("#review_results").append('<br/><br/><h3><?php echo $this->lang->line("classroom_module_congratsEndOfCourse");?></h3>');
+				$("#review_results").append('<br/><a href="#" data-toggle="modal" data-target="#rate_course_modal" class="btn btn-primary"><?php echo $this->lang->line("classroom_module_rateToReceive");?></a>');
 			}
 		}
 	}
 
 
 	function repeatModule(module_id){
-		if(confirm('Are you sure you want to clear your progress and start over?'))
+		if(confirm('<?php echo $this->lang->line("classroom_module_confirmClearResults");?>'))
 		{
-			<?php echo 'repeat_url = "'.base_url("classroom/repeat_module/".$module_arr["id"]).'";';?>
+			<?php $repurl = base_url("classroom/repeat_module/".$module_arr['id']).'/'.$course_arr['id'];?>
+			repeat_url = "<?php echo $repurl;?>";
 			document.location = repeat_url;
 		}
 	}

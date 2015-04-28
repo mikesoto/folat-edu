@@ -69,7 +69,7 @@
 					</div>
 
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-6  course-info-listing">
-						<strong>'.$this->lang->line('courseField_teacher').': </strong><br/>
+						<strong>'.$this->lang->line('courseField_subcategory').': </strong><br/>
 						<a href="'.base_url().'courses/category/'.$course['course_category_info']['cat_slug'].'/'.$course['course_subcat_info']['subcat_slug'].'" class="btn btn-default btn-subcat btn-xs">
 							'.$this->lang->line('subcat_'.$course['course_subcat_info']['subcat_slug']).'
 						</a>

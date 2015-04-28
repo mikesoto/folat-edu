@@ -1,7 +1,7 @@
 <?php
 
 $lang['moduleEdit_btn_backToCourse'] 			= 'Volver al Curso';
-$lang['moduleEdit_title_module'] 				= 'Módulo')	
+$lang['moduleEdit_title_module'] 				= 'Módulo';	
 $lang['moduleEdit_btn_editModuleInfo'] 			= 'Editar Info del Módulo';
 $lang['moduleEdit_title_slideForModule'] 		= 'Slides de este módulo';
 $lang['moduleEdit_msg_noSlides']				= 'Este módulo no tiene slides.';

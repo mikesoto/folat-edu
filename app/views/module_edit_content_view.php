@@ -40,7 +40,7 @@
 							<?php echo lineBreaksToBr($module_arr['summary']);?>
 						</div>
 						<div class="col-sm-6 col-xs-12">
-							<h4><?php echo $this->lang->line('moduleField_type');?>: <?php echo $module_arr['module_type_name'];?></h4>
+							<h4><?php echo $this->lang->line('moduleField_type');?>: <?php echo $this->lang->line('moduleField_type_'.$module_arr['module_type_name']);?></h4>
 							<?php echo $this->lang->line('moduleField_typeDesc_'.$module_arr['module_type_name']);?>
 						</div>
 				</div>

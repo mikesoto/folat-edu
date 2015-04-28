@@ -285,26 +285,6 @@ class Account_model extends CI_Model {
 		return true;
 	}
 
-	public function get_course_grade($user_id,$course_id){
-		$query = $this->db->get_where('folat_review_scores',array('student_id' => $user_id,'course_id' => $course_id));
-		$scores_arr = $query->result_array();
-		$total_scores = count($scores_arr);
-		if($total_scores > 0)
-		{
-			$sum = 0;
-			foreach($scores_arr as $score)
-			{
-				$sum += $score['final_score'];
-			}
-			$cgpa = $sum/$total_scores;
-			return $cgpa;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
 	public function getCourseModules($course_id){
 		$this->db->order_by('chapter','asc');
 		$this->db->order_by('section','asc');
@@ -366,13 +346,49 @@ class Account_model extends CI_Model {
 		return $course_length;
 	}
 
-
-
 	public function generate_cert_code($course_id,$user_id){
-		$cgpa = get_course_grade($user_id);
+		//get the average grade for this course
+		$query = $this->db->get_where('folat_review_scores',array('student_id' => $user_id,'course_id' => $course_id));
+		$scores_arr = $query->result_array();
+		$total_scores = count($scores_arr);
+		if($total_scores > 0)
+		{
+			$sum = 0;
+			foreach($scores_arr as $score)
+			{
+				$sum += $score['final_score'];
+			}
+			$cgpa = $sum/$total_scores;
+		}
+		else
+		{
+			$cgpa = 'na';
+		}
+
+		//get date info
 		$dt = getdate();
 
-		$cert_code = $course_id.'-'.$user_id.'-'.$cgpa.'-'.$dt['year'].$dt['mon'].$dt['mday'].$dt['hours'].$dt['minutes'].$dt['seconds'];
+		//build cert code form cgpa and date info
+		$cert_code = $user_id.'-'.$course_id.'-'.$cgpa.'-'.$dt['year'].$dt['mon'].$dt['mday'].$dt['hours'].$dt['minutes'].$dt['seconds'];
+
+		$new_cert = array(
+			'user_id' => mysql_real_escape_string($user_id),
+			'course_id' => mysql_real_escape_string($course_id),
+			'cert_code' => mysql_real_escape_string($cert_code)
+		);
+		//insert new cert code into folat_certificates table
+		$query = $this->db->insert("folat_certificates",$new_cert);
+
 		return $cert_code;
 	}
+
+	public function clearCert($user_id,$course_id){
+		//delete the users cert for this course
+		$qstr = sprintf( "DELETE FROM folat_certificates WHERE user_id = %d and course_id = %d LIMIT 1",
+				mysql_real_escape_string($user_id),
+				mysql_real_escape_string($course_id));
+		$res = $this->db->query($qstr);
+		return $res;
+	}
+
 }

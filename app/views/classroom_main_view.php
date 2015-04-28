@@ -1,11 +1,11 @@
 <div class="container">
 	<div class="row animated fadeIn">
 		<div class="col-md-12">
-			<h3>Classroom: <?php echo $course_arr['course_title'];?></h3>
+			<h3><?php echo $this->lang->line('classroom_main_classroom').': '.$course_arr['course_title'];?></h3>
 		</div>
 
 		<div class="col-md-6">
-			<h3>Course Modules</h3>
+			<h3><?php echo $this->lang->line('classroom_main_course_modules');?></h3>
 			<?php
 				//var_dump($review_scores);
 				$count = 1;

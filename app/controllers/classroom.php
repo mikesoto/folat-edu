@@ -155,14 +155,16 @@ class Classroom extends MY_controller {
 	}
 
 
-	public function repeat_module($module_id){
+	public function repeat_module($module_id,$course_id){
 		global $data;
 		$this->MY_setLanguage('ClassroomModule');
 		//Check if logged in and get user data
 		$this->MY_checkIfLoggedIn();
-		//delete module review results and scores for this user and moduel from database
+		//delete module review results and scores for this user and module from database
 		$clear_results = $this->modules_model->clearReviewResults($module_id,$data['user_id']);
-		if($clear_results)
+		//delete any existing certificates for this course and user
+		$clear_cert = $this->account_model->clearCert($data['user_id'],$course_id);
+		if($clear_results && $clear_cert)
 		{	//send back to beginning of classroom for module
 			redirect(base_url('classroom/module/'.$module_id));
 		}
