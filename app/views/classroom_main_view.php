@@ -61,6 +61,7 @@
 										'.$module['chapter'].'.'.$module['section'].' &nbsp; '.$module['title'].'
 									</div>
 								    <div class="col-md-3">
+								    	<i class="fa fa-lock"></i>
 								    </div>
 						  		  </div> ';
 						  	$show_link_next = 'false';
