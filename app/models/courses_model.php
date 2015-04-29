@@ -234,10 +234,18 @@ class Courses_model extends CI_Model {
 			return false;
 		}
 
-		//ADD course_user_info to the course_arr
+		//Add course teacher info 
 		$query = $this->db->get_where('folat_users', array('user_id' => $course_arr['course_teacher_id']));
 		$teacher = $query->row_array();
-		$course_arr['course_teacher_info'] = $teacher;
+		$course_arr['course_teacher_info'] = array(
+			'user_id' => $teacher['user_id'],
+			'user_name' => $teacher['user_name'],
+			'user_lastname' => $teacher['user_lastname'],
+			'user_username' => $teacher['user_username'],
+			'user_email' => $teacher['user_email'],
+			'user_about' => $teacher['user_about'],
+			'user_image' => $teacher['user_image']
+		);
 		
 		//ADD course_category_info to the course_arr
 		$query = $this->db->get_where('folat_categories', array('id' => $course_arr['course_category_id']));
@@ -248,6 +256,32 @@ class Courses_model extends CI_Model {
 		$query = $this->db->get_where('folat_subcategories', array('id' => $course_arr['course_subcat_id']));
 		$subcategory = $query->row_array();
 		$course_arr['course_subcat_info'] = $subcategory;
+
+		//Add course rating info 
+		$query = $this->db->get_where('folat_course_ratings', array('course_id' => $course_arr['id']));
+		$ratings = $query->result_array();
+		$course_arr['course_rating_info'] = $ratings;
+		$avg = '';
+		$sum = 0;
+		//calculate average rating
+		if( !empty($ratings) )
+		{
+			$total_ratings = count($ratings);
+			foreach($ratings as $r ){
+				$int = (int)$r['rating'];
+				$sum += $int;
+			}
+			$avg = round($sum/$total_ratings);
+		}
+		$course_arr['course_rating_avg'] = $avg;
+
+		//get all course modules 
+		$mods = $this->getCourseModules($course_arr['id']);
+		$course_arr['course_modules'] = $mods;
+		//get total length of course
+		$total_length = $this->getCourseLength($mods);
+		//add course time in HH:MM format
+		$course_arr['course_time'] = convertToTime($total_length);
 		return $course_arr;
 	}
 
@@ -261,10 +295,18 @@ class Courses_model extends CI_Model {
 			return false;
 		}
 
-		//ADD course_user_info to the course_arr
+		//Add course teacher info 
 		$query = $this->db->get_where('folat_users', array('user_id' => $course_arr['course_teacher_id']));
 		$teacher = $query->row_array();
-		$course_arr['course_teacher_info'] = $teacher;
+		$course_arr['course_teacher_info'] = array(
+			'user_id' => $teacher['user_id'],
+			'user_name' => $teacher['user_name'],
+			'user_lastname' => $teacher['user_lastname'],
+			'user_username' => $teacher['user_username'],
+			'user_email' => $teacher['user_email'],
+			'user_about' => $teacher['user_about'],
+			'user_image' => $teacher['user_image']
+		);
 		
 		//ADD course_category_info to the course_arr
 		$query = $this->db->get_where('folat_categories', array('id' => $course_arr['course_category_id']));
@@ -275,6 +317,32 @@ class Courses_model extends CI_Model {
 		$query = $this->db->get_where('folat_subcategories', array('id' => $course_arr['course_subcat_id']));
 		$subcategory = $query->row_array();
 		$course_arr['course_subcat_info'] = $subcategory;
+
+		//Add course rating info 
+		$query = $this->db->get_where('folat_course_ratings', array('course_id' => $course_arr['id']));
+		$ratings = $query->result_array();
+		$course_arr['course_rating_info'] = $ratings;
+		$avg = '';
+		$sum = 0;
+		//calculate average rating
+		if( !empty($ratings) )
+		{
+			$total_ratings = count($ratings);
+			foreach($ratings as $r ){
+				$int = (int)$r['rating'];
+				$sum += $int;
+			}
+			$avg = round($sum/$total_ratings);
+		}
+		$course_arr['course_rating_avg'] = $avg;
+
+		//get all course modules 
+		$mods = $this->getCourseModules($course_arr['id']);
+		$course_arr['course_modules'] = $mods;
+		//get total length of course
+		$total_length = $this->getCourseLength($mods);
+		//add course time in HH:MM format
+		$course_arr['course_time'] = convertToTime($total_length);
 		return $course_arr;
 
 	}
@@ -462,6 +530,5 @@ class Courses_model extends CI_Model {
 		}
 		return $insubcat;
 	}
-
 
 }

@@ -32,7 +32,7 @@ class Verify_Rate_Course extends MY_Controller {
           //create new certificate ID 
           $CertID = $this->account_model->generate_cert_code($this->input->post('course_id'),$data['user_id']);
           //Go to certificate
-          redirect('account/certificate/'.$this->input->post('course_id'));
+          redirect('account/certificate/'.$CertID);
        }
        else
        {

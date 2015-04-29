@@ -369,7 +369,7 @@ class Account_model extends CI_Model {
 		$dt = getdate();
 
 		//build cert code form cgpa and date info
-		$cert_code = $user_id.'-'.$course_id.'-'.$cgpa.'-'.$dt['year'].$dt['mon'].$dt['mday'].$dt['hours'].$dt['minutes'].$dt['seconds'];
+		$cert_code = $user_id.'-'.$course_id.'-'.$cgpa.'-'.$dt['year'].'-'.$dt['mon'].'-'.$dt['mday'].'-'.$dt['hours'].':'.$dt['minutes'].':'.$dt['seconds'];
 
 		$new_cert = array(
 			'user_id' => mysql_real_escape_string($user_id),
@@ -391,4 +391,23 @@ class Account_model extends CI_Model {
 		return $res;
 	}
 
+	public function getCertData($cert_id){
+		//use the cert_id string to get basic info
+		$cert = explode('-', $cert_id);
+		$cert_data = array(
+			'user_id' 	=> $cert[0],
+			'course_id' => $cert[1],
+			'grade'		=> $cert[2],
+			'year'		=> $cert[3],
+			'month'		=> $cert[4],
+			'day'		=> $cert[5],
+			'time'		=> $cert[6],
+		);
+		return $cert_data;
+	}
+
+
 }
+
+
+
