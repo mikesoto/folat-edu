@@ -103,6 +103,10 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8
 	color:#fff;
 }
 
+.certificate-wrapper .folat_logo_text{
+	color:#4096ee;
+}
+
 .no-courses-in-category {
 	margin-top:100px;
 }
@@ -812,4 +816,33 @@ a.subcat-link .glyphicon{
 .cat_badge{
 	background-color:#999;
 	font-size:12px;
+}
+
+.certificate-wrapper {
+	background-image:url(../images/certback.png);
+	background-repeat:no-repeat;
+	max-width:2100px;
+	padding-top:200px;
+	padding-bottom:300px;
+	padding-right:70px;
+	padding-left:50px;
+	background-size:100%;
+}
+
+/*medium devices*/
+@media all and (max-width: 995px) {
+	.certificate-wrapper {
+		padding-top:60px;
+		padding-bottom:200px;
+		padding-right:40px;
+		padding-left:30px;
+		background-size:100%;
+	}
+}
+
+/*small devices*/
+@media all and (max-width: 640px) {
+	.certificate-wrapper {
+		background-size:100% 500px;
+	}
 }

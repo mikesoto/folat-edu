@@ -90,6 +90,7 @@ class Account extends MY_controller {
 		$this->MY_setLanguage('Certificate');
 		$data['cert_data'] = $this->account_model->getCertData($cert_id);
 		$data['course_arr'] = $this->courses_model->getCourseDetailsById($data['cert_data']['course_id']);
+		$data['student_data'] = $this->account_model->get_user_data($data['cert_data']['user_id']);
 		$this->MY_show_page('Certificate', 'certificate_view', $data);//loads header, content, and footer views
 	}
 

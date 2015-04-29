@@ -51,6 +51,22 @@ class Account_model extends CI_Model {
 			return $data;
 	}
 
+	public function get_user_data($user_id){
+		   $this -> db -> select('user_name, user_lastname, user_email, user_username, user_about, user_image');
+		   $this -> db -> from('folat_users');
+		   $this -> db -> where('user_id', $user_id);
+		   $this -> db -> limit(1);
+		   $query = $this -> db -> get();
+		   if($query -> num_rows() == 1)
+		   {
+		     return $query->row_array();
+		   }
+		   else
+		   {
+		     return false;
+		   }
+	}
+
 	public function check_username_avail($new_username, $user_id)
 	{
 
@@ -395,6 +411,7 @@ class Account_model extends CI_Model {
 		//use the cert_id string to get basic info
 		$cert = explode('-', $cert_id);
 		$cert_data = array(
+			'cert_id' 	=> $cert_id,
 			'user_id' 	=> $cert[0],
 			'course_id' => $cert[1],
 			'grade'		=> $cert[2],
