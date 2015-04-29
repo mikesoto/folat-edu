@@ -16,7 +16,7 @@ class Courses extends MY_controller {
 		$this->MY_setCatFilters($cat_slug,$subcat_slug);//sets the category and subcategory variables in the data array
 		$this->MY_get_categories();//sets the cat_list and subcat_list variables
 		$this->MY_get_incategories();//gets total courses in each category and subcategory for "badges"
-		$data['courses_arr'] = $this->courses_model->getCourses($cat_slug, $subcat_slug, $featured, $this->config->item('language'));
+		$data['courses_arr'] = $this->courses_model->getCourses($cat_slug, $subcat_slug, $featured, $this->session->userdata('language'));
 
 		$this->MY_show_page('Courses', 'course_list_view', $data);
 	}

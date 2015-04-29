@@ -160,7 +160,7 @@ class Classroom extends MY_controller {
 		$this->MY_setLanguage('ClassroomModule');
 		//Check if logged in and get user data
 		$this->MY_checkIfLoggedIn();
-		//delete module review results and scores for this user and module from database
+		//delete module review results and scores for this user
 		$clear_results = $this->modules_model->clearReviewResults($module_id,$data['user_id']);
 		//delete any existing certificates for this course and user
 		$clear_cert = $this->account_model->clearCert($data['user_id'],$course_id);

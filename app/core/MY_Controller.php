@@ -16,13 +16,13 @@ class MY_Controller extends CI_controller {
 	public function MY_setLanguage($page)
 	{
 		if(isset($_GET['lang'])){//saves new set language to session and config parameters
-			$language = mysql_real_escape_string($_GET['lang']);
+			$language = addslashes(htmlentities($_GET['lang']));
 			//store language setting in the session so it get's loaded on every page
 			$this->session->set_userdata('language', $language);
 			//send back to the page they where on
 			if(isset($_GET['refurl']))
 			{
-				$refurl = mysql_real_escape_string($_GET['refurl']);
+				$refurl = addslashes($_GET['refurl']);
 				redirect(base_url($refurl));
 			}
 		}

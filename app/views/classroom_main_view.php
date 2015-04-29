@@ -70,5 +70,25 @@
 			?>
 		</div>
 
+		<div class="col-md-6">
+			<h2>Course Tracker</h2>
+			Course Length: <?php echo $course_time['hh'].':'.$course_time['mm'];?><br>
+			Reviews for this course:
+			<?php 
+			foreach($review_scores as $rev):
+			?>
+			<div class="col-md-12">
+				Date: <?php echo $rev['datetime'];?><br/>
+				Module ID: <?php echo $rev['module_id'];?><br/>
+				Total Questions: <?php echo $rev['total_questions'];?><br/>
+				Correct Answers: <?php echo $rev['correct_answers'];?><br/>
+				Incorrect Answers: <?php echo $rev['incorrect_answers'];?><br/>
+				Final Score: <?php echo $rev['final_score'];?><br/>
+				<hr/>
+			</div>
+			<?php endforeach;?>
+		</div>
+
+
 	</div>
 </div>
