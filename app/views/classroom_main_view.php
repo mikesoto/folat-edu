@@ -29,10 +29,10 @@
 					{
 						echo '<a href="'.base_url('classroom/module/'.$module['id']).'">';
 							echo '<div id="module_'.$count.'" class="row class-room-module-item main-active-module">
-									<div class="col-md-9">
+									<div class="col-sm-9">
 										'.$module['chapter'].'.'.$module['section'].' &nbsp; '.$module['title'].'
 									</div>
-								    <div class="col-md-3">';
+								    <div class="col-sm-3">';
 								    	//determin if the score is passing
 										if($final_score > 69)
 										{
@@ -71,25 +71,61 @@
 			?>
 		</div>
 
-		<div class="col-md-6">
-			<h2>Course Tracker</h2>
-			Course Length: <?php echo $course_time['hh'].':'.$course_time['mm'];?><br>
-			Reviews for this course:
+		<div class="col-md-3 hidden-sm hidden-xs">
+			<h3>Questions</h3>
+			<!-- Course Length: <?php echo $course_time['hh'].':'.$course_time['mm'];?><br> -->
 			<?php 
-			foreach($review_scores as $rev):
+			foreach($review_scores as $rev)
+			{
+				echo '
+					  <div class="rev_qbox_container">
+						  <div class="col-md-12">';
+							//show correct qboxes
+							for($i = 0; $i < $rev['correct_answers']; $i++)
+							{
+								echo '<div class="rev_qbox_correct"></div>';
+							}
+							//show incorrect qboxes
+							for($i = 0; $i < $rev['incorrect_answers']; $i++)
+							{
+								echo '<div class="rev_qbox_incorrect"></div>';
+							}
+
+				echo '	  </div>
+					  </div>';
+			}
 			?>
-			<div class="col-md-12">
-				Date: <?php echo $rev['datetime'];?><br/>
-				Module ID: <?php echo $rev['module_id'];?><br/>
-				Total Questions: <?php echo $rev['total_questions'];?><br/>
-				Correct Answers: <?php echo $rev['correct_answers'];?><br/>
-				Incorrect Answers: <?php echo $rev['incorrect_answers'];?><br/>
-				Final Score: <?php echo $rev['final_score'];?><br/>
-				<hr/>
-			</div>
-			<?php endforeach;?>
+
+			<!--	<div class="col-md-12">
+					Date: <?php echo $rev['datetime'];?><br/>
+					Module ID: <?php echo $rev['module_id'];?><br/>
+					Total Questions: <?php echo $rev['total_questions'];?><br/>
+					Correct Answers: <?php echo $rev['correct_answers'];?><br/>
+					Incorrect Answers: <?php echo $rev['incorrect_answers'];?><br/>
+					Final Score: <?php echo $rev['final_score'];?><br/>
+					<hr/>
+				</div>-->
 		</div>
 
-
+		<div class="col-md-3">
+			
+			<?php 
+				//calculate course average
+				$scores = count($review_scores);
+				$total = 0;
+				$avg = 0;
+				if($scores > 0){
+					foreach($review_scores as $rev){
+						$total += $rev['final_score'];
+					}
+					$avg = ($total/$scores);
+				}
+			?>
+			<?php 
+				echo '<div class="text-center">
+						<h3>Course Average</h3>
+						<h2>'.round($avg).'</h2>
+					  </div>';
+			?>
 	</div>
 </div>
