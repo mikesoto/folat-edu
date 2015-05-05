@@ -669,7 +669,7 @@
 			foreach($module_content as $s)
 			{
 				//add slide object to slides array in javascript (indexed by the slide id number)
-				echo 'slides["'.$s['id'].'"] = {id:'.$s['id'].',module_id: '.$s['module_id'].' , order_num: "'.$s['order_num'].'", length: "'.$s['length'].'", title: "'.sanitizeString($s['title']).'", body: "'.removeBreaks(sanitizeString($s['body'])).'", refs: "'.sanitizeString($s['refs']).'"};
+				echo 'slides["'.$s['id'].'"] = {id:'.$s['id'].',module_id: '.$s['module_id'].' , order_num: "'.$s['order_num'].'", length: "'.$s['length'].'", title: "'.sanitizeString($s['title']).'", body: "'.sanitizeString($s['body']).'", refs: "'.sanitizeString($s['refs']).'"};
 				';
 			}
 		}

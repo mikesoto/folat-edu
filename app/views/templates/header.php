@@ -29,7 +29,7 @@
 			        "searchreplace visualblocks code fullscreen",
 			        "insertdatetime media table contextmenu paste"
 			    	],
-			    	toolbar: "insertfile undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+			    	toolbar: "undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image code"
 				});
 		</script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -41,7 +41,12 @@
 			$(document).ready(function(){
 				//adds the prettyprint class for code blocks
 				$("pre").addClass('prettyprint linenums');
-
+				//converts html breaks to line breaks in pre elements (for all linenumbs to show)
+				$("pre").each(function(){
+					contents = $(this).html()
+					newcontents = contents.replace(/(<br>|<br\/>)/g,'\r\n');
+					$(this).html(newcontents);
+				});
 				//start carousel if it exists
 				if($('.carousel').length){
 					$('.carousel').carousel({
