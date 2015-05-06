@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row animated fadeIn">
 		<div class="col-md-12">
-			<h3><?php echo $this->lang->line('classroom_main_classroom').': '.$course_arr['course_title'];?></h3>
+			<h3><?php echo $this->lang->line('classroom_main_classroom').': <a href="'.base_url().'courses/details/'.$course_arr['course_slug'].'">'.$course_arr['course_title'];?></a></h3>
 		</div>
 
 		<div class="col-md-6">
@@ -24,7 +24,7 @@
 							}
 						}
 					}
-					//determin if the module should be active and linked
+					//determine if the module should be active and linked
 					if($final_score > 0 || $count == 1 || $show_link_next == 'true')
 					{
 						echo '<a href="'.base_url('classroom/module/'.$module['id']).'">';
@@ -75,53 +75,56 @@
 			<h3>Questions</h3>
 			<!-- Course Length: <?php echo $course_time['hh'].':'.$course_time['mm'];?><br> -->
 			<?php 
-			foreach($review_scores as $rev)
+			if($review_scores){
+				foreach($review_scores as $rev)
+				{
+					echo '
+						  <div class="rev_qbox_container">
+							  <div class="col-md-12">';
+								//show correct qboxes
+								for($i = 0; $i < $rev['correct_answers']; $i++)
+								{
+									echo '<div class="rev_qbox_correct"></div>';
+								}
+								//show incorrect qboxes
+								for($i = 0; $i < $rev['incorrect_answers']; $i++)
+								{
+									echo '<div class="rev_qbox_incorrect"></div>';
+								}
+
+					echo '	  </div>
+						  </div>';
+				}
+			}
+			else
 			{
 				echo '
-					  <div class="rev_qbox_container">
-						  <div class="col-md-12">';
-							//show correct qboxes
-							for($i = 0; $i < $rev['correct_answers']; $i++)
-							{
-								echo '<div class="rev_qbox_correct"></div>';
-							}
-							//show incorrect qboxes
-							for($i = 0; $i < $rev['incorrect_answers']; $i++)
-							{
-								echo '<div class="rev_qbox_incorrect"></div>';
-							}
-
-				echo '	  </div>
-					  </div>';
+						  <div class="rev_qbox_container">
+							  <div class="col-md-12">
+							  	None completed.
+							  </div>
+						  </div>
+					 ';
 			}
 			?>
-
-			<!--	<div class="col-md-12">
-					Date: <?php echo $rev['datetime'];?><br/>
-					Module ID: <?php echo $rev['module_id'];?><br/>
-					Total Questions: <?php echo $rev['total_questions'];?><br/>
-					Correct Answers: <?php echo $rev['correct_answers'];?><br/>
-					Incorrect Answers: <?php echo $rev['incorrect_answers'];?><br/>
-					Final Score: <?php echo $rev['final_score'];?><br/>
-					<hr/>
-				</div>-->
 		</div>
 
 		<div class="col-md-3">
-			
 			<?php 
-				//calculate course average
-				$scores = count($review_scores);
-				$total = 0;
 				$avg = 0;
-				if($scores > 0){
-					foreach($review_scores as $rev){
-						$total += $rev['final_score'];
+				if($review_scores){
+					//calculate course average
+					$scores = count($review_scores);
+					$total = 0;
+					
+					if($scores > 0){
+						foreach($review_scores as $rev){
+							$total += $rev['final_score'];
+						}
+						$avg = ($total/$scores);
 					}
-					$avg = ($total/$scores);
 				}
-			?>
-			<?php 
+			
 				echo '<div class="text-center">
 						<h3>Course Average</h3>
 						<h2>'.round($avg).'</h2>

@@ -92,66 +92,60 @@
 		</div>
 	</div>
 	
-	<div class="col-md-12 text-center">
-		<?php 
-		if($is_enrolled)
-			{
-				echo '<h3>'.$this->lang->line('courseDetails_msg_enrolledInClass').'</h3>
-					  <a class="btn btn-lg btn-primary" href="'.base_url('classroom/main/'.$course_arr['course_slug']).'">
-					  	'.$this->lang->line('courseDetails_btn_goToClass').'
-					  </a>
-
-				';
-			}
-		?>
-	</div>
-
-
 	<div class="col-lg-12 text-center enroll-section">
 		<?php 
+		if($is_enrolled)
+		{
+			echo '<h3>'.$this->lang->line('courseDetails_msg_enrolledInClass').'</h3>
+				  <a class="btn btn-lg btn-primary" href="'.base_url('classroom/main/'.$course_arr['course_slug']).'">
+				  	'.$this->lang->line('courseDetails_btn_goToClass').'
+				  </a>
+
+			';
+		}
+		else
+		{
 			//display enrollment message only if not enrolled
-			if(!$is_enrolled)
+			switch($course_arr['enrollment_status'])
 			{
-				switch($course_arr['enrollment_status'])
-				{
-					case 0:
-						echo '<h3>
-								'.$this->lang->line('courseDetails_msg_notReadyEnroll').'
-							  </h3>
-							  <p>&nbsp;</p>
-							  <p>
-							  	'.$this->lang->line('courseDetails_msg_enrollNotification1').'
-							  </p>
-							  <p>
-							  	<a href="#" class="btn btn-primary btn-lg">'.$this->lang->line('courseDetails_msg_enrollNotification2').'</a>
-							  </p>
-							  	'.$this->lang->line('courseDetails_msg_enrollNotification3').'
-							  </p>';
-						break;
-					case 1:
-						echo '
-							<h2>'.$this->lang->line('courseDetails_title_enrollInCourse').'</h2>
-							<a href="'.base_url('account/enroll/'.$course_arr['course_slug']).'" class="btn btn-success btn-lg">
-								'.$this->lang->line('courseDetails_btn_signMeUp').'
-							</a>
-						';
-						break;
-					case 2:
-						echo '<h3>
-								'.$this->lang->line('courseDetails_msg_pausedEnroll').'
-							  </h3>
-							  <p>&nbsp;</p>
-							  <p>
-							  	'.$this->lang->line('courseDetails_msg_enrollNotification1').'
-							  </p>
-							  <p>
-							  	<a href="#" class="btn btn-primary btn-lg">'.$this->lang->line('courseDetails_msg_enrollNotification2').'</a>
-							  </p>
-							  	'.$this->lang->line('courseDetails_msg_enrollNotification3').'
-							  </p>';
-						break;
-				}
+				case 0:
+					echo '<h3>
+							'.$this->lang->line('courseDetails_msg_notReadyEnroll').'
+						  </h3>
+						  <p>&nbsp;</p>
+						  <p>
+						  	'.$this->lang->line('courseDetails_msg_enrollNotification1').'
+						  </p>
+						  <p>
+						  	<a href="#" class="btn btn-primary btn-lg">'.$this->lang->line('courseDetails_msg_enrollNotification2').'</a>
+						  </p>
+						  	'.$this->lang->line('courseDetails_msg_enrollNotification3').'
+						  </p>';
+					break;
+				case 1:
+					echo '
+						<h2>'.$this->lang->line('courseDetails_title_enrollInCourse').'</h2>
+						<a href="'.base_url('account/enroll/'.$course_arr['course_slug']).'" class="btn btn-success btn-lg">
+							'.$this->lang->line('courseDetails_btn_signMeUp').'
+						</a>
+					';
+					break;
+				case 2:
+					echo '<h3>
+							'.$this->lang->line('courseDetails_msg_pausedEnroll').'
+						  </h3>
+						  <p>&nbsp;</p>
+						  <p>
+						  	'.$this->lang->line('courseDetails_msg_enrollNotification1').'
+						  </p>
+						  <p>
+						  	<a href="#" class="btn btn-primary btn-lg">'.$this->lang->line('courseDetails_msg_enrollNotification2').'</a>
+						  </p>
+						  	'.$this->lang->line('courseDetails_msg_enrollNotification3').'
+						  </p>';
+					break;
 			}
+		}
 		?>
 	</div>
 
