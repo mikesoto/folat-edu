@@ -25,7 +25,7 @@ $lang['classroom_module_correctAnswer'] 		= 'Correct Answer';
 $lang['classroom_module_yourScore'] 			= 'Your score for this review is';
 $lang['classroom_module_povenComprehension'] 	= 'You have proven comprehension of this material and may continue to the next module.';
 $lang['classroom_module_notProvenComprehension']= 'You have not proven comprehension of this material. Please try again.';
-$lang['classroom_module_congratsEndOfCourse'] 	= 'Congratulations! You&quot;ve reached the end of the course.';
+$lang['classroom_module_congratsEndOfCourse'] 	= 'Congratulations! You&#39;ve reached the end of the course.';
 $lang['classroom_module_rateToReceive'] 		= 'Rate this course to receive your certificate of completion.';
 $lang['classroom_module_confirmClearResults'] 	= 'Are you sure you want to clear your progress and start over?';
 
