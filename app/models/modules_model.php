@@ -393,6 +393,16 @@ class Modules_model extends CI_Model {
 		return false;
 	}
 
+	public function getReviewScoresAll($course_id){
+		$scores_query = $this->db->get_where('folat_review_scores', array('course_id' => $course_id) );
+		$scores_result = $scores_query->result_array();
+		if($scores_result)
+		{
+			return $scores_result;
+		}
+		return false;
+	}
+
 	public function checkIfNextModule($prev_module,$course_modules){
 		$found = false;
 		foreach($course_modules as $mod)

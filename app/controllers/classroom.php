@@ -48,6 +48,45 @@ class Classroom extends MY_controller {
 	}
 
 
+	public function teacher($course_slug)
+	{
+		global $data;
+		$this->MY_setLanguage('ClassroomTeacher');
+		//Check if logged in and get user data
+		$this->MY_checkIfLoggedIn();
+		//Get course data
+		$data['course_arr'] = $this->courses_model->getCourseDetails($course_slug);
+		if($data['course_arr'])
+		{
+			//Check if teach of in this course
+			$data['is_teacher'] = $this->courses_model->check_ownership($data['course_arr']['id'],$data['user_id']);
+			if($data['is_teacher'])
+			{
+				//get any existing modules for this course
+				$data['modules_arr'] = $this->courses_model->getCourseModules($data['course_arr']['id']); //returns array or false if none
+				//get course length and time
+				$data['course_arr']['total_length'] = $this->courses_model->getCourseLength($data['modules_arr']);
+				$data['course_time'] = convertToTime($data['course_arr']['total_length']);
+				//get any review scores data for this course and user
+				$data['review_scores'] = $this->modules_model->getReviewScoresAll( $data['course_arr']['id'] );
+				//get all students enrolled in this course
+				$data['students'] = $this->courses_model->getCourseStudents( $data['course_arr']['id'] );
+				//load the classroom main view
+				$this->MY_show_page('Classroom '.$data['course_arr']['course_title'], 'classroom_teacher_view', $data);
+			}
+			else
+			{
+				redirect(base_url('account/teaching'));
+			}
+		}
+		else
+		{
+			redirect(base_url('account/teaching'));
+		}
+		
+	}
+
+
 	public function module($module_id)
 	{
 		global $data;

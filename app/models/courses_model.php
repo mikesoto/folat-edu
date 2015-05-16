@@ -531,4 +531,34 @@ class Courses_model extends CI_Model {
 		return $insubcat;
 	}
 
+	public function getCourseStudents($course_id){
+		$students = array();
+		//check if user already registered
+		$query = "SELECT * FROM folat_enrollment WHERE course_id = $course_id AND status = 'Active'";
+		$res = $this->db->query($query);
+		if($res->num_rows() > 0)
+		{
+			$res_arr = $res->result_array();
+		   	//create array of students with their info
+			foreach($res_arr as $row)
+			{
+				//query users table for info
+				$user_query = "SELECT user_id, user_name, user_lastname, user_email, user_username, user_about, user_image FROM folat_users WHERE user_id = ".$row['user_id'];
+				$user_res = $this->db->query($user_query);
+				if($user_res)
+				{
+					$user = $user_res->row_array();
+					$user['enrollment_date'] = $row['enrollment_date'];
+					array_push($students,$user);
+				}
+			}
+		   	return $students;
+		}
+		else
+		{
+			//return empty array
+			return $students;
+		}
+	}
+
 }
