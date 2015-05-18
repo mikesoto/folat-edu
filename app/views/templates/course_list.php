@@ -41,6 +41,10 @@
 							';
 						}
 						if(trim($cl_page) == 'account_teaching'){
+							echo '<a href="'.base_url('/classroom/teacher/'.$course['course_slug']).'" title="View Student Progress">
+									<i class="fa fa-list"></i>
+								  </a>
+							';
 							echo '<a href="'.base_url('/courses/manage/'.$course['course_slug']).'" title="Edit this course">
 									<i class="fa fa-pencil-square-o"></i>
 								  </a>
