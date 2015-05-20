@@ -907,7 +907,7 @@ a.subcat-link .glyphicon{
 }
 
 .teacher-classroom-module-block-normal {
-	padding:2px 0px;
+	padding:4px 0px;
 	text-align:center;
 	border-radius:5px;
 	-moz-border-radius:5px;
@@ -915,14 +915,14 @@ a.subcat-link .glyphicon{
 	margin:0px 1px;
 	display: inline-block;
 	width:22px;
-	font-size:12px;
 	background-color: #999;
 	color:#fff;
+	font-size:10px;
 }
 
 
 .teacher-classroom-module-block-completed {
-	padding:2px 0px;
+	padding:4px 0px;
 	text-align:center;
 	border-radius:5px;
 	-moz-border-radius:5px;
@@ -930,8 +930,8 @@ a.subcat-link .glyphicon{
 	margin:0px 1px;
 	display: inline-block;
 	width:22px;
-	font-size:12px;
 	color:#fff;
+	font-size:10px;
 	background: #b4e391; /* Old browsers */
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2I0ZTM5MSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzYxYzQxOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiNGUzOTEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -945,7 +945,7 @@ a.subcat-link .glyphicon{
 }
 
 .teacher-classroom-module-block-failed {
-	padding:2px 0px;
+	padding:4px 0px;
 	text-align:center;
 	border-radius:5px;
 	-moz-border-radius:5px;
@@ -953,7 +953,7 @@ a.subcat-link .glyphicon{
 	margin:0px 1px;
 	display: inline-block;
 	width:22px;
-	font-size:12px;
+	font-size:10px;
 	color:#fff;
 	background: #f2825b; /* Old browsers */
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -965,5 +965,4 @@ a.subcat-link .glyphicon{
 	background: -ms-linear-gradient(top,  #f2825b 0%,#e55b2b 50%,#f07146 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #f2825b 0%,#e55b2b 50%,#f07146 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2825b', endColorstr='#f07146',GradientType=0 ); /* IE6-8 */
-
 }

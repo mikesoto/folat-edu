@@ -17,6 +17,20 @@
 				</h4>
 		</div>
 
+		<div class="col-md-12 text-center">
+			<?php if(!empty($slides_arr)):?>
+				<div id="slide_controls" class="module_slide_controls">
+					<a id="prev-slide-btn" href="#" onclick="showPrevSlide();return false;">
+						<span class="glyphicon glyphicon-arrow-left previous_arrow"></span>
+					</a>
+					<a id="next-slide-btn" href="#" onclick="showNextSlide();return false;">
+						<span class="glyphicon glyphicon-arrow-right next_arrow"></span>
+					</a>
+					<a id="start_review_btn" href="#" class="btn btn-primary" onclick="start_review();return false;"><?php echo $this->lang->line('classroom_module_startReview');?></a>
+				</div>
+			<?php endif;?>
+		</div>
+
 		<div id="slide_row_window" class="col-md-12 slide_row_container">
 			<?php 
 				$questions_arr = array(); //array to store all slide questons
@@ -46,23 +60,7 @@
 				}
 				
 			?>
-			<div class="col-md-12 text-center">
-				<?php if(!empty($slides_arr)):?>
-					<div id="slide_controls" class="module_slide_controls">
-						<a id="prev-slide-btn" href="#" onclick="showPrevSlide();return false;">
-							<span class="glyphicon glyphicon-arrow-left previous_arrow"></span>
-						</a>
-						<a id="next-slide-btn" href="#" onclick="showNextSlide();return false;">
-							<span class="glyphicon glyphicon-arrow-right next_arrow"></span>
-						</a>
-						<a id="start_review_btn" href="#" class="btn btn-primary" onclick="start_review();return false;"><?php echo $this->lang->line('classroom_module_startReview');?></a>
-					</div>
-				<?php endif;?>
-			</div>
 		</div>
-		
-
-
 
 
 		<!---------------------- Module Review ------------------------------>

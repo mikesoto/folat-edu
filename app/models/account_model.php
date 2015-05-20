@@ -221,9 +221,9 @@ class Account_model extends CI_Model {
 		   { 
 			    $course_result = $this->db->query("SELECT * FROM folat_courses WHERE id = ".$row->course_id);
 			    $course = $course_result->row_array();
-
-			    //ADD TEACHER INFO
-		      	$query = $this->db->get_where('folat_users', array('user_id' => $course['course_teacher_id']));
+			    
+				//Add course teacher info 
+				$query = $this->db->get_where('folat_users', array('user_id' => $course['course_teacher_id']));
 				$teacher = $query->row_array();
 				$course['course_teacher_info'] = array(
 					'user_id' => $teacher['user_id'],
@@ -235,17 +235,20 @@ class Account_model extends CI_Model {
 					'user_image' => $teacher['user_image']
 				);
 
-				//ADD CATEGORY INFO
+				//Add course category info 
 				$query = $this->db->get_where('folat_categories', array('id' => $course['course_category_id']));
 				$category = $query->row_array();
 				$course['course_category_info'] = $category;
 
-				//ADD SUBCATEGORY INFO
+				//Add course subcat info 
 				$query = $this->db->get_where('folat_subcategories', array('id' => $course['course_subcat_id']));
 				$subcategory = $query->row_array();
 				$course['course_subcat_info'] = $subcategory;
 
-				//Add course rating average
+				//Add course rating info 
+				$query = $this->db->get_where('folat_course_ratings', array('course_id' => $course['id']));
+				$ratings = $query->result_array();
+				$course['course_rating_info'] = $ratings;
 				$avg = '';
 				$sum = 0;
 				//calculate average rating
@@ -260,13 +263,14 @@ class Account_model extends CI_Model {
 				}
 				$course['course_rating_avg'] = $avg;
 
-				//get all course modules
+				//get all course modules 
 				$mods = $this->getCourseModules($course['id']);
-				$courses['course_modules'] = $mods;
+				$course['course_modules'] = $mods;
 				//get total length of course
 				$total_length = $this->getCourseLength($mods);
+				//add course time in HH:MM format
 				$course['course_time'] = convertToTime($total_length);
-
+				
 				//push the generated course data into the teaching_courses array
 		      	array_push($teaching_courses, $course);
 		   }
