@@ -31,11 +31,12 @@ class Account_model extends CI_Model {
 		$email = $this->db->escape($_POST['user_email']);
 		$username = $this->db->escape($_POST['user_username']);
 		$psw = $this->db->escape($_POST['user_password']);
-
-		$sql = "INSERT INTO folat_users (user_name,user_lastname,user_email,user_username,user_password) 
-				VALUES($name,$lastname,$email,$username,$psw)";
+		// Generate random 32 character hash and assign it to a local variable.
+		$hash = md5( rand(0,1000) ); 
+		$sql = "INSERT INTO folat_users (user_name,user_lastname,user_email,user_username,user_password,hash) 
+				VALUES($name,$lastname,$email,$username,$psw,$hash)";
 		$res = $this->db->query($sql);
-		return $res;
+		return ($res)? $hash : $res; //returns hash if query was successfull
 	}
 
 	

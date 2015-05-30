@@ -27,7 +27,8 @@ class Verify_Account_Create extends MY_Controller {
      else
      {
        //insert new user into database
-       if($this->account_model->insert_new_user())
+       $hash = $this->account_model->insert_new_user();
+       if($hash)
        {
           $this->load->library('email');
           $this->email->from($this->input->post('user_email'), $this->input->post('user_name'));
@@ -39,6 +40,25 @@ class Verify_Account_Create extends MY_Controller {
           username: '.$this->input->post('user_username').'<br/>
           ';
           $this->email->subject('New user Registration');
+          $this->email->message($body);
+          if(!$this->email->send()){
+           // echo $this->email->print_debugger();
+           die();
+          }
+
+          $this->email->to($this->input->post('user_email'), $this->input->post('user_name'));
+          $this->email->from('noreply@folat-edu.net');
+          $body = 'Thank you for registering for an account at folat-edu.net.<br/>
+          Activate your account by clicking on the following link: <br/>
+          http://www.folat-edu.net/account/validate/?hc='.$hash.'<br/><br/>
+          The following is the information provided at registration: <br/>
+          first name: '.$this->input->post('user_name').'<br/>
+          last name: '.$this->input->post('user_lastname').'<br/>
+          email: '.$this->input->post('user_email').'<br/>
+          username: '.$this->input->post('user_username').'<br/><br/>
+          If you did not register for this account, do not click the activation link above and contact us at info@folat-edu.net
+          ';
+          $this->email->subject('Folat-edu.net Account Verification');
           $this->email->message($body);
           if(!$this->email->send()){
            // echo $this->email->print_debugger();

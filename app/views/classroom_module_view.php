@@ -171,7 +171,7 @@
 				if($has_review_score[0]['final_score'] < 69)
 				{
 					echo "
-					if(confirm('<?php echo $this->lang->line('classroom_module_failingGrade');?>'))
+					if(confirm('You have a failing grade for this module. Do you want to clear your review results and start over?'))
 					{
 						repeat_url = '".base_url("classroom/repeat_module/".$module_arr["id"])."';
 						document.location = repeat_url;
