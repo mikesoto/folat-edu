@@ -12,6 +12,7 @@ class Account_model extends CI_Model {
 	   $this -> db -> from('folat_users');
 	   $this -> db -> where('user_username', $username);
 	   $this -> db -> where('user_password', MD5($password));
+	   $this -> db -> where('email_verified', 1);
 	   $this -> db -> limit(1);
 	   $query = $this -> db -> get();
 	 
@@ -34,9 +35,26 @@ class Account_model extends CI_Model {
 		// Generate random 32 character hash and assign it to a local variable.
 		$hash = md5( rand(0,1000) ); 
 		$sql = "INSERT INTO folat_users (user_name,user_lastname,user_email,user_username,user_password,hash) 
-				VALUES($name,$lastname,$email,$username,$psw,$hash)";
+				VALUES($name,$lastname,$email,$username,$psw,'".$hash."')";
 		$res = $this->db->query($sql);
 		return ($res)? $hash : $res; //returns hash if query was successfull
+	}
+
+	function validate_user($hash){
+	   $res = $this->db->get_where('folat_users',array('hash' => $hash));
+	   $user = $res->row_array();
+	   if($user){
+		   if(!$user['email_verified'])
+		   {
+		   		$query = $this->db->query("UPDATE folat_users SET email_verified = 1 WHERE user_id = ".$user['user_id']." LIMIT 1");
+		   }
+		   return true;
+	   }
+	   else
+	   {
+	   	return false;
+	   }
+	   
 	}
 
 	

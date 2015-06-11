@@ -25,7 +25,7 @@ class Verify_Login extends MY_Controller {
      else
      {
         //validation passed, if there is a reference page, send them there, else send to account/profile page
-        $ref = substr($_GET['ref'],1);
+        $ref = $_GET['ref'];
         if($ref != '')
         {
           //Go to private area

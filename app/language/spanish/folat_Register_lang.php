@@ -10,6 +10,6 @@ $lang['register_label_confirmPassword'] 			= 'Confirmar Contraseña:';
 $lang['register_label_iHaveRead'] 					= 'He leído y estoy de acuerdo con los ';
 $lang['register_label_folatTermsOfService'] 		= 'Términos de servicio FOLAT';
 $lang['register_label_createMyAccount'] 			= 'Crear Mi Cuenta';
-$lang['register_text_thankYouMessage']				= 'Gracias por registrarse. Ahora puede abrir una sesión!';
+$lang['register_text_thankYouMessage']				= 'Gracias por registrarse. Por favor revise su bandeja de entrada y haga clic en el enlace de verificación para activar su cuenta.!';
 
 ?>

@@ -50,7 +50,7 @@ class Verify_Account_Create extends MY_Controller {
           $this->email->from('noreply@folat-edu.net');
           $body = 'Thank you for registering for an account at folat-edu.net.<br/>
           Activate your account by clicking on the following link: <br/>
-          http://www.folat-edu.net/account/validate/?hc='.$hash.'<br/><br/>
+          http://folat-edu.net/account/validate/?hc='.$hash.'<br/><br/>
           The following is the information provided at registration: <br/>
           first name: '.$this->input->post('user_name').'<br/>
           last name: '.$this->input->post('user_lastname').'<br/>

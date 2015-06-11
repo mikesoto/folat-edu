@@ -10,6 +10,6 @@ $lang['register_label_confirmPassword'] 			= 'Confirm Password:';
 $lang['register_label_iHaveRead'] 					= 'I have read and agree to the ';
 $lang['register_label_folatTermsOfService'] 		= 'FOLAT Terms of Service';
 $lang['register_label_createMyAccount'] 			= 'Create My Acccount';
-$lang['register_text_thankYouMessage']				= 'Thank you for registering. You can now log in!';
+$lang['register_text_thankYouMessage']				= 'Thank you for registering. Please check your inbox and click the verification link to activate your account.';
 
 ?>

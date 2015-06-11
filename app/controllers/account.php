@@ -94,5 +94,24 @@ class Account extends MY_controller {
 		$this->MY_show_page('Certificate', 'certificate_view', $data);//loads header, content, and footer views
 	}
 
+	public function validate(){	
+		global $data;
+		if(isset($_GET['hc']))
+		{
+			$hash = $_GET['hc'];
+			$res = $this->account_model->validate_user($hash);
+			if($res != 'ok')
+			{
+				$_SESSION['flash_error'] = "There was a problem validating your email. Please try again or contact us at info@folat-edu.net";
+			}
+			else
+			{
+				$_SESSION['flash_success'] = "Your email address has been validated. You can now sign in.";
+			}
+		}   
+		//Go back to the login page
+	   	redirect('account/login/', 'refresh');
+	}
+
 
 }
