@@ -54,6 +54,12 @@
 				<h2><?php echo $this->lang->line('moduleEdit_title_slideForModule');?></h2>
 			</div>
 
+			<div class="col-lg-12 text-center">
+				<button type="button" class="btn btn-primary btn-lg add-new-slide-button" data-toggle="modal" data-target="#add_slide_modal">
+				  <?php echo $this->lang->line('moduleEdit_btn_addNewSlide');?>
+				</button>
+			</div>
+
 			<div class="col-lg-12">
 				<div class="list-group">
 					<?php if(!$module_content):?>
@@ -67,27 +73,18 @@
 							<li class="col-lg-12 list-group-item text-module-slide-listing">
 								<div class="col-lg-12">
 									
-									<div class="col-lg-3 text-right pull-right">
-										<ul class="nav nav-tabs course-action-menu">
-										  <li role="presentation" class="dropdown">
-										    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-										       <span class="glyphicon glyphicon-pencil"></span> 
-										        <?php echo $this->lang->line('slideField_teacherActions');?>
-										       <span class="caret"></span>
-										    </a>
-										    <ul class="dropdown-menu" role="menu">
-										       <li>
-										         <a href="#" data-toggle="modal" data-target="#edit_slide_modal" onclick="setEditSlideContent(<?php echo $content['id'];?>);return false;"><?php echo $this->lang->line('slideField_editSlide');?></a>
-										       </li>
-										       <li>
-										         <a data-toggle="modal" data-target="#add_questions_modal" onclick="setAddQuestionContent('<?php echo addslashes($content['title'])."','".$content['id'];?>');return false;"><?php echo $this->lang->line('slideField_addQuestion');?></a>
-										       </li>
-										       <li>
-										         <a href="#" data-toggle="modal" data-target="#delete_slide_modal" onclick="setDeleteSlideContent(<?php echo $module_arr['id'].','.$content['id'].',\''.$content['title'].'\'';?>);return false;"><?php echo $this->lang->line('slideField_deleteSlide');?></a>
-										       </li>
-										    </ul>
-										  </li>
-										</ul>
+									<div class="slide-edit-controls col-lg-3 text-right pull-right">
+										<a href="#" title="<?php echo $this->lang->line('slideField_editSlide');?>" data-toggle="modal" data-target="#edit_slide_modal" onclick="setEditSlideContent(<?php echo $content['id'];?>);return false;">
+											<i class="fa fa-pencil-square-o"></i>
+										</a>
+							
+										<a href="#" title="<?php echo $this->lang->line('slideField_addQuestion');?>" data-toggle="modal" data-target="#add_questions_modal" onclick="setAddQuestionContent('<?php echo addslashes($content['title'])."','".$content['id'];?>');return false;">
+											<i class="fa fa-question"></i>
+										</a>
+										
+										<a class="trash-link" href="#"  title="<?php echo $this->lang->line('slideField_deleteSlide');?>" data-toggle="modal" data-target="#delete_slide_modal" onclick="setDeleteSlideContent(<?php echo $module_arr['id'].','.$content['id'].',\''.$content['title'].'\'';?>);return false;">
+									       	<i class="fa fa-trash-o"></i>
+									    </a>
 									</div>
 
 									<div class="col-lg-1">	
