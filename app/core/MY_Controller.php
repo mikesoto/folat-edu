@@ -19,12 +19,20 @@ class MY_Controller extends CI_controller {
 			$language = addslashes(htmlentities($_GET['lang']));
 			//store language setting in the session so it get's loaded on every page
 			$this->session->set_userdata('language', $language);
-			//send back to the page they where on
+			//send back to the page they where on before they selected language
 			if(isset($_GET['refurl']))
 			{
 				$refurl = addslashes($_GET['refurl']);
 				redirect(base_url($refurl));
 			}
+		}
+		else
+		{
+			//set English as default language if has not already been set
+			if($this->session->userdata('language') == '')
+			{
+				$this->session->set_userdata('language','english');
+			}	
 		}
 		$this->config->set_item('language', $this->session->userdata('language'));
 		//load all global language files
