@@ -14,7 +14,7 @@ class Verify_Text_Slide_Create extends MY_Controller {
      $this->load->library('form_validation');
      $this->form_validation->set_rules('module_id', 'Module Id', 'trim|required|xss_clean');
      $this->form_validation->set_rules('title', 'lang:slideField_title', 'trim|required|xss_clean|max_length[50]');
-     $this->form_validation->set_rules('body', 'lang:slideField_body', 'trim|required|xss_clean|max_length[2000]');
+     $this->form_validation->set_rules('body', 'lang:slideField_body', 'trim|required|xss_clean');
      $this->form_validation->set_rules('order_num', 'lang:slideField_orderNum', 'trim|required|xss_clean|numeric');
      $this->form_validation->set_rules('length', 'lang:slideField_length', 'trim|required|xss_clean|numeric');
      $this->form_validation->set_rules('refs', 'lang:slideField_references', 'trim|xss_clean');
