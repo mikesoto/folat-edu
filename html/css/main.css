@@ -975,3 +975,11 @@ a.subcat-link .glyphicon{
 .trash-link{
 	color:red;
 }
+
+.edit-content-slide-body img{
+	border:thin solid #ccc;
+}
+
+.module_text_slide img {
+	border:thin solid #ccc;
+}

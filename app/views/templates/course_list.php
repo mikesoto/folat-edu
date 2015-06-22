@@ -22,10 +22,22 @@
 		echo '	
 			<div class="course_cat_listing">
 				<div class="row">
-					<div class="col-lg-8 course-info-listing">
+					<div class="col-lg-8 course-info-listing">';
+					if($cl_page == 'account_teaching')
+					{
+						echo '
+						<a href="'.base_url('courses/manage/'.$course['course_slug']).'">
+							<h3 class="list-course-title">'.$course['course_title'].'</h3>
+						</a>';
+					}
+					else
+					{
+						echo '
 						<a href="'.base_url('courses/details/'.$course['course_slug']).'">
 							<h3 class="list-course-title">'.$course['course_title'].'</h3>
-						</a>
+						</a>';
+					}
+		echo '				
 					</div>
 					<div class="col-lg-2 course-info-rating">
 						'.$rating_str.'
