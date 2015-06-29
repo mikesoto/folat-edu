@@ -36,6 +36,12 @@
 					<?php echo $cert_data['cert_id'];?>
 				</h4>
 			</div>
+			<div class="col-md-12 text-center">
+				<h4>Certificate Link:</h4>
+				<a href="<?php echo base_url('account/certificate/'.$cert_data['cert_id']);?>">
+					<?php echo base_url('account/certificate/'.$cert_data['cert_id']);?>
+				</a>
+			</div>
 		</div>		
 	</div>
 </div>
