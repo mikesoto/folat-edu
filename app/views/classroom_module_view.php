@@ -20,13 +20,13 @@
 		<div class="col-md-12 text-center">
 			<?php if(!empty($slides_arr)):?>
 				<div id="slide_controls" class="module_slide_controls">
-					<a id="prev-slide-btn" href="#" onclick="showPrevSlide();return false;">
+					<a id="prev-slide-btn" class="prev-slide" href="#" onclick="showPrevSlide();return false;">
 						<span class="glyphicon glyphicon-arrow-left previous_arrow"></span>
 					</a>
-					<a id="next-slide-btn" href="#" onclick="showNextSlide();return false;">
+					<a id="next-slide-btn" class="next-slide" href="#" onclick="showNextSlide();return false;">
 						<span class="glyphicon glyphicon-arrow-right next_arrow"></span>
 					</a>
-					<a id="start_review_btn" href="#" class="btn btn-primary" onclick="start_review();return false;"><?php echo $this->lang->line('classroom_module_startReview');?></a>
+					<a id="start_review_btn" href="#" class="btn btn-primary start-rev" onclick="start_review();return false;"><?php echo $this->lang->line('classroom_module_startReview');?></a>
 				</div>
 			<?php endif;?>
 		</div>
@@ -60,6 +60,20 @@
 				}
 				
 			?>
+		</div>
+
+		<div class="col-md-12 text-center">
+			<?php if(!empty($slides_arr)):?>
+				<div id="slide_controls" class="module_slide_controls">
+					<a id="prev-slide-btn" class="prev-slide" href="#" onclick="showPrevSlide();return false;">
+						<span class="glyphicon glyphicon-arrow-left previous_arrow"></span>
+					</a>
+					<a id="next-slide-btn" class="next-slide" href="#" onclick="showNextSlide();return false;">
+						<span class="glyphicon glyphicon-arrow-right next_arrow"></span>
+					</a>
+					<a id="start_review_btn" href="#" class="btn btn-primary start-rev" onclick="start_review();return false;"><?php echo $this->lang->line('classroom_module_startReview');?></a>
+				</div>
+			<?php endif;?>
 		</div>
 
 
@@ -199,6 +213,7 @@
 				sliding = false;
 			<?php endif;?>
 		}
+		refreshArrows();
 		
 	});
 
@@ -237,32 +252,34 @@
 
 	function refreshArrows(){
 		//hide both arrows
-		$("#prev-slide-btn").css('display','none');
-		$("#next-slide-btn").css('display','none');
+		$(".prev-slide").css('display','none');
+		$(".next-slide").css('display','none');
 		if(total_slides > 1 && current_slide > 1)
 		{
 			//show prev arrow
-			$("#prev-slide-btn").css('display','block');
+			$(".prev-slide").css('display','block');
 		}
 		if(total_slides > 1 && current_slide < total_slides)
 		{
 			//show next arrow
-			$("#next-slide-btn").css('display','block');
+			$(".next-slide").css('display','block');
 		}
 		//show review button if last slide
 		if(total_slides == current_slide)
 		{
 			//show review button 
-			$("#start_review_btn").css('display','block');
+			$(".start-rev").css('display','block');
 		}
 		else
 		{
 			//hide review button 
-			$("#start_review_btn").css('display','none');
+			$(".start-rev").css('display','none');
 		}
 	}
 
 	function showNextSlide(){
+		//scroll to top of page
+		window.scrollTo(0, 0);
 		//hide arrow durring slide change
 		if(!sliding){
 			sliding = true;
@@ -290,6 +307,8 @@
 	function showPrevSlide(){
 		if(!sliding)
 		{
+			//scroll to top of page
+			window.scrollTo(0, 0);
 			sliding = true;
 			//set return animation for the current slide
 			$("#slide_"+current_slide).removeClass('fadeInLeft');
@@ -316,7 +335,7 @@
 		//hide last slide
 		$("#slide_"+current_slide).addClass('fadeOutLeft');
 		//hide slide controls
-		$("#slide_controls").addClass('animated fadeOut');
+		$(".module_slide_controls").addClass('animated fadeOut');
 		start_rev = false;
 		if(has_review_score || has_review_score === 0)
 		{
@@ -379,7 +398,7 @@
 
 			setTimeout(function(){
 				$("#slide_"+current_slide).css('display','none');
-				$("#slide_controls").css('display','none');
+				$(".module_slide_controls").css('display','none');
 				$("#slide_row_window").css('display','none');
 				$("#module_review").css('display','block');
 			},500);
@@ -488,7 +507,6 @@
 		        console.log( "Status: " + status );
 		        console.dir( xhr );
 		    }
-
 		});
 	}
 
@@ -545,6 +563,7 @@
 				$("#review_results").css('display','block');
 			},500);
 		}
+
 	}
 
 	function showReviewContent(json_res)
