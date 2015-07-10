@@ -73,7 +73,7 @@
 							<li class="col-lg-12 list-group-item text-module-slide-listing">
 								<div class="col-lg-12">
 									
-									<div class="slide-edit-controls col-lg-3 text-right pull-right">
+									<div class="slide-edit-controls col-lg-3 text-right pull-right" style="z-index:999;">
 										<a href="#" title="<?php echo $this->lang->line('slideField_editSlide');?>" data-toggle="modal" data-target="#edit_slide_modal" onclick="setEditSlideContent(<?php echo $content['id'];?>);return false;">
 											<i class="fa fa-pencil-square-o"></i>
 										</a>
